@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>TG-bPASS | Telangana Building Permission</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'IBM Plex Sans',sans-serif;background:#f0f4f0;color:#222;font-size:14px;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+ul{list-style:none;}
+img{display:block;max-width:100%;}
+button{cursor:pointer;font-family:'IBM Plex Sans',sans-serif;}
+
+:root{
+  --green:#1a7a3c;--g2:#0f5a28;--teal:#1a9b7a;
+  --accent:#e8a020;--red:#d32f2f;--blue:#1565c0;
+  --light:#eef7f1;--border:#c8e0d0;
+  --sidebar:#0c1f14;--sidebar2:#172d1f;
+  --shadow:0 2px 14px rgba(0,0,0,0.09);
+}
+
+/* UTILITY BAR */
+#util-bar{background:#111;color:#aaa;display:flex;justify-content:space-between;align-items:center;padding:5px 24px;font-size:11.5px;flex-wrap:wrap;gap:4px;}
+#util-bar a{color:#aaa;transition:color .18s;}#util-bar a:hover{color:#fff;}
+.u-sep{color:#444;margin:0 4px;}
+.fz-btns{display:flex;gap:4px;}
+.fz-btn{width:22px;height:22px;border:1px solid #444;background:none;color:#ccc;border-radius:3px;font-size:10px;line-height:1;}
+.fz-btn:hover{background:#333;}
+
+/* SITE HEADER */
+#site-header{background:#fff;border-bottom:2px solid var(--border);padding:10px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:900;box-shadow:0 2px 8px rgba(0,0,0,.07);}
+.hdr-emblem{width:60px;height:60px;flex-shrink:0;}
+.hdr-divider{width:2px;height:44px;background:var(--border);flex-shrink:0;}
+.hdr-text .t1{font-size:14px;font-weight:700;color:var(--green);letter-spacing:.01em;}
+.hdr-text .t2{font-size:12px;font-weight:600;color:var(--g2);margin-top:2px;}
+.hdr-text .t3{font-size:11px;color:#999;margin-top:1px;}
+
+/* MAIN NAV */
+#main-nav{background:var(--green);position:relative;z-index:800;}
+.nav-inner{display:flex;align-items:stretch;padding:0 24px;}
+.nav-home{color:#fff;padding:0 14px;font-size:13px;font-weight:600;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.15);transition:background .18s;letter-spacing:.03em;}
+.nav-home:hover{background:rgba(255,255,255,.1);}
+.nav-item{position:relative;color:#fff;padding:13px 15px;font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:5px;border-right:1px solid rgba(255,255,255,.08);white-space:nowrap;transition:background .18s;user-select:none;}
+.nav-item:hover{background:rgba(255,255,255,.13);}
+.nav-item .arr{font-size:8px;opacity:.7;}
+.drop{display:none;position:absolute;top:100%;left:0;background:#fff;border:1px solid var(--border);border-top:3px solid var(--green);min-width:210px;box-shadow:0 8px 24px rgba(0,0,0,.13);z-index:1000;}
+.nav-item:hover .drop{display:block;}
+.drop a{display:block;padding:10px 16px;font-size:12.5px;color:#333;border-bottom:1px solid #f0f0f0;transition:background .14s,color .14s;cursor:pointer;}
+.drop a:last-child{border-bottom:none;}
+.drop a:hover{background:var(--light);color:var(--green);}
+.nav-item{cursor:pointer;}
+.nav-login{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.35);padding:8px 16px;border-radius:4px;font-size:12.5px;font-weight:600;margin:auto 0 auto 8px;transition:background .18s;}
+.nav-login:hover{background:rgba(255,255,255,.28);}
+.nav-apply{background:var(--accent);color:#fff;border:none;padding:8px 18px;border-radius:4px;font-size:12.5px;font-weight:700;margin:auto 0 auto 8px;transition:background .18s,transform .15s;letter-spacing:.03em;}
+.nav-apply:hover{background:#c8880e;transform:translateY(-1px);}
+
+/* NEWS TICKER */
+#news-bar{background:#e6f4ec;border-bottom:1px solid var(--border);display:flex;align-items:center;height:30px;overflow:hidden;}
+.news-lbl{background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:0 12px;height:100%;display:flex;align-items:center;flex-shrink:0;letter-spacing:.06em;}
+.ticker-track{flex:1;overflow:hidden;}
+.ticker-inner{display:flex;white-space:nowrap;animation:scrollTick 32s linear infinite;}
+.ticker-inner span{font-size:12px;color:var(--g2);padding:0 50px 0 20px;display:inline-block;}
+@keyframes scrollTick{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* HERO */
+#hero{position:relative;height:380px;overflow:hidden;}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;display:flex;align-items:center;}
+.slide.active{opacity:1;}
+.slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;}
+.slide-overlay{position:absolute;inset:0;background:linear-gradient(to right,rgba(5,30,14,.88) 0%,rgba(5,30,14,.6) 55%,rgba(0,0,0,.08) 100%);}
+.slide-content{position:relative;z-index:2;padding:0 56px;max-width:560px;}
+.slide-tag{display:inline-block;background:var(--accent);color:#111;font-size:11px;font-weight:700;padding:3px 10px;border-radius:2px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;}
+.slide-content h1{font-family:'IBM Plex Sans',sans-serif;font-size:40px;font-weight:700;color:#fff;line-height:1.1;text-shadow:0 2px 12px rgba(0,0,0,.4);margin-bottom:12px;}
+.slide-content p{color:rgba(255,255,255,.82);font-size:13.5px;line-height:1.75;margin-bottom:20px;}
+.slide-btns{display:flex;gap:12px;flex-wrap:wrap;}
+.sbtn-white{background:#fff;color:var(--green);border:none;padding:11px 24px;border-radius:4px;font-size:13px;font-weight:700;transition:transform .15s,box-shadow .15s;}
+.sbtn-white:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(0,0,0,.18);}
+.sbtn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.55);padding:11px 22px;border-radius:4px;font-size:13px;font-weight:600;transition:background .18s;}
+.sbtn-outline:hover{background:rgba(255,255,255,.15);}
+.slide-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(0,0,0,.35);color:#fff;border:none;width:40px;height:40px;border-radius:50%;font-size:18px;display:flex;align-items:center;justify-content:center;transition:background .18s;}
+.slide-arrow:hover{background:rgba(0,0,0,.6);}
+#prev-slide{left:18px;}#next-slide{right:18px;}
+.slide-dots{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:7px;}
+.sdot{width:10px;height:10px;border-radius:50%;border:2px solid rgba(255,255,255,.65);background:rgba(255,255,255,.25);cursor:pointer;transition:background .2s;}
+.sdot.on{background:#fff;}
+
+/* SECTIONS */
+.section{padding:54px 52px;}
+.sec-title{font-family:'IBM Plex Sans',sans-serif;font-size:26px;font-weight:700;text-align:center;color:#111;margin-bottom:8px;}
+.sec-dept{color:var(--green);font-size:14px;font-weight:600;text-align:center;margin-bottom:20px;}
+.sec-body{color:#555;font-size:13.5px;line-height:1.82;max-width:860px;margin:0 auto 14px;text-align:justify;}
+.sal-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 50px;max-width:1000px;margin:0 auto;}
+.sal-col li{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444;line-height:1.65;margin-bottom:13px;}
+.sal-col li::before{content:'—';color:var(--teal);font-size:14px;flex-shrink:0;margin-top:1px;}
+.so-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1020px;margin:0 auto;}
+.so-card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:28px 20px;text-align:center;transition:transform .2s,box-shadow .2s;}
+.so-card:hover{transform:translateY(-5px);box-shadow:0 10px 28px rgba(10,100,40,.12);}
+.so-icon{width:70px;height:70px;margin:0 auto 14px;background:var(--light);border-radius:6px;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);}
+.so-icon svg{width:32px;height:32px;stroke:var(--green);fill:none;stroke-width:1.8;}
+.so-card h3{font-size:12.5px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+.so-card p{font-size:12.5px;color:#666;line-height:1.65;}
+.contact-grid{display:grid;grid-template-columns:1.15fr 1fr;gap:26px;max-width:960px;margin:0 auto;}
+.c-box{background:#f8f8f8;border:1px solid #e0e0e0;border-radius:6px;padding:28px;}
+.c-box h3{font-size:13.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px;padding-bottom:8px;border-bottom:2px solid var(--green);display:inline-block;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.fld{margin-bottom:12px;}
+.fld label{font-size:11.5px;font-weight:600;color:#666;display:block;margin-bottom:4px;}
+.fld input,.fld textarea{width:100%;padding:9px 12px;border:1px solid #ccc;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;color:#333;background:#fff;outline:none;transition:border-color .2s;}
+.fld input:focus,.fld textarea:focus{border-color:var(--green);}
+.fld textarea{min-height:96px;resize:vertical;}
+.captcha-row{border:1px solid #ccc;border-radius:4px;padding:12px;display:flex;align-items:center;gap:10px;margin-bottom:14px;font-size:12.5px;color:#555;background:#fafafa;}
+.sub-btn{background:var(--green);color:#fff;border:none;padding:10px 28px;border-radius:4px;font-size:14px;font-weight:600;transition:background .18s;display:flex;align-items:center;gap:7px;}
+.sub-btn:hover{background:var(--g2);}
+.info-row{margin-bottom:16px;}
+.info-lbl{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+.info-val{font-size:13.5px;color:#333;line-height:1.65;}
+.info-val a{color:var(--teal);}
+.info-val strong{color:var(--green);font-size:15px;}
+
+/* FOOTER */
+#site-footer{background:#1a1a1a;color:#aaa;padding:36px 52px 16px;}
+.foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.4fr;gap:36px;max-width:1100px;margin:0 auto 28px;}
+.foot-col h4{color:#fff;font-size:12.5px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px;padding-bottom:6px;border-bottom:1px solid #333;}
+.foot-col a{display:block;font-size:12.5px;color:#777;margin-bottom:7px;cursor:pointer;transition:color .18s;}
+.foot-col a:hover{color:#fff;}
+.foot-social{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.s-btn{width:30px;height:30px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;transition:opacity .18s;}
+.s-btn:hover{opacity:.8;}
+.foot-bottom{border-top:1px solid #2a2a2a;padding-top:14px;text-align:center;font-size:11.5px;color:#555;max-width:1100px;margin:0 auto;}
+
+/* LOGIN MODAL */
+#login-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:5000;display:none;align-items:center;justify-content:center;}
+#login-modal.open{display:flex;}
+.modal-box{background:#fff;border-radius:10px;padding:38px;width:430px;max-width:94vw;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:popIn .28s ease;}
+@keyframes popIn{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;color:#aaa;line-height:1;transition:color .18s;}
+.modal-close:hover{color:#333;}
+.modal-logo{width:52px;height:52px;border-radius:8px;background:linear-gradient(135deg,var(--g2),var(--teal));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;text-align:center;line-height:1.3;margin:0 auto 14px;letter-spacing:.04em;}
+.modal-box h2{font-size:22px;font-weight:700;text-align:center;margin-bottom:4px;}
+.modal-sub{text-align:center;color:#888;font-size:12.5px;margin-bottom:20px;}
+.tab-row{display:flex;background:#f0f0f0;border-radius:4px;padding:3px;margin-bottom:18px;gap:3px;}
+.tab-btn{flex:1;padding:7px 4px;border:none;background:none;font-size:12.5px;cursor:pointer;border-radius:3px;color:#888;transition:all .2s;}
+.tab-btn.on{background:#fff;color:var(--green);font-weight:700;box-shadow:0 1px 4px rgba(0,0,0,.09);}
+.err-box{background:#ffebee;border:1px solid #ffcdd2;border-radius:4px;padding:10px 14px;font-size:12.5px;color:var(--red);margin-bottom:12px;display:none;}
+.err-box.show{display:block;}
+.fld-forgot{text-align:right;font-size:12px;color:var(--teal);cursor:pointer;margin:-8px 0 12px;}
+.login-btn{width:100%;padding:11px;background:linear-gradient(135deg,var(--green),var(--g2));color:#fff;border:none;border-radius:4px;font-size:14px;font-weight:700;letter-spacing:.04em;transition:opacity .2s;}
+.login-btn:hover{opacity:.9;}
+
+/* DASHBOARD */
+#dash-wrap{display:none;min-height:100vh;flex-direction:column;}
+.dash-top{background:var(--sidebar);color:#8aaa90;display:flex;justify-content:space-between;align-items:center;padding:6px 22px;font-size:12px;}
+.dt-left{display:flex;align-items:center;gap:10px;}
+.dt-right{display:flex;align-items:center;gap:14px;}
+.notif-btn{position:relative;background:none;border:none;color:#8aaa90;display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;}
+.nbadge{background:var(--red);color:#fff;width:16px;height:16px;border-radius:50%;font-size:9px;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.logout-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#ccc;padding:5px 14px;border-radius:4px;font-size:12px;transition:background .18s;}
+.logout-btn:hover{background:rgba(255,255,255,.2);}
+.dash-header{background:#fff;border-bottom:2px solid var(--border);padding:10px 22px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 2px 8px rgba(0,0,0,.06);}
+.dash-brand{display:flex;align-items:center;gap:10px;}
+.dash-emblem{width:42px;height:42px;}
+.db-title{font-size:13px;font-weight:700;color:var(--green);}
+.db-sub{font-size:11px;color:#999;}
+.officer-chip{display:flex;align-items:center;gap:10px;}
+.officer-av{width:38px;height:38px;border-radius:4px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:13px;letter-spacing:.03em;}
+.officer-name{font-size:13px;font-weight:600;}
+.officer-role{font-size:11px;color:#888;}
+.dash-layout{display:flex;flex:1;min-height:calc(100vh - 108px);}
+.sidebar{width:238px;background:var(--sidebar);flex-shrink:0;display:flex;flex-direction:column;overflow-y:auto;}
+.sb-section{padding:12px 0;}
+.sb-heading{font-size:10px;font-weight:700;letter-spacing:.12em;color:#3a5a42;text-transform:uppercase;padding:0 16px 7px;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#8aaa90;cursor:pointer;transition:background .18s,color .18s;position:relative;}
+.sb-item:hover{background:var(--sidebar2);color:#d0e8d4;}
+.sb-item.active{background:var(--green);color:#fff;}
+.sb-item.active::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);}
+.sb-ic{width:16px;height:16px;flex-shrink:0;}
+.sb-ic svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;}
+.sb-badge{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;color:#fff;}
+.sb-badge.red{background:var(--red);}
+.sb-badge.amber{background:var(--accent);}
+.sb-badge.blue{background:var(--blue);}
+.sb-badge.green{background:var(--green);}
+.sb-divider{height:1px;background:rgba(255,255,255,.06);margin:4px 0;}
+.dash-main{flex:1;padding:26px;background:#f0f4f0;overflow-y:auto;}
+.dview{display:none;}
+.dview.active{display:block;animation:fadein .3s ease;}
+@keyframes fadein{from{opacity:0;transform:translateY(7px);}to{opacity:1;transform:translateY(0);}}
+.phdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:10px;}
+.phdr h2{font-size:20px;font-weight:700;color:#111;}
+.phdr .bc{font-size:12px;color:#999;margin-top:3px;}
+.phdr-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px;}
+.scard{background:#fff;border-radius:6px;padding:20px;border:1px solid var(--border);box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform .2s;}
+.scard:hover{transform:translateY(-2px);}
+.scard::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.scard.blue::before{background:var(--blue);}
+.scard.green::before{background:var(--green);}
+.scard.amber::before{background:var(--accent);}
+.scard.red::before{background:var(--red);}
+.scard .si{width:28px;height:28px;margin-bottom:10px;}
+.scard .si svg{width:28px;height:28px;stroke-width:1.5;fill:none;}
+.scard.blue .si svg{stroke:var(--blue);}
+.scard.green .si svg{stroke:var(--green);}
+.scard.amber .si svg{stroke:var(--accent);}
+.scard.red .si svg{stroke:var(--red);}
+.scard .sv{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:500;line-height:1;}
+.scard.blue .sv{color:var(--blue);}
+.scard.green .sv{color:var(--green);}
+.scard.amber .sv{color:var(--accent);}
+.scard.red .sv{color:var(--red);}
+.scard .sl{font-size:12px;color:#888;margin-top:4px;}
+.scard .ss{font-size:11px;color:#bbb;margin-top:5px;}
+.tc{background:#fff;border-radius:6px;border:1px solid var(--border);box-shadow:var(--shadow);overflow:hidden;margin-bottom:18px;}
+.tc-head{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.tc-title{font-size:15px;font-weight:600;color:#111;}
+.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.sbox{display:flex;align-items:center;gap:6px;background:#f5f5f5;border:1px solid #ddd;border-radius:4px;padding:6px 12px;}
+.sbox input{background:none;border:none;outline:none;font-family:'IBM Plex Sans',sans-serif;font-size:13px;width:200px;}
+.fsel{padding:7px 10px;border:1px solid #ddd;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:12.5px;background:#fff;outline:none;color:#333;}
+table{width:100%;border-collapse:collapse;}
+thead tr{background:#f8fbf8;}
+th{padding:10px 13px;text-align:left;font-size:11px;font-weight:700;color:#666;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--border);}
+td{padding:11px 13px;font-size:13px;color:#333;border-bottom:1px solid #f0f0f0;vertical-align:middle;}
+tr:hover td{background:#f5faf6;}
+tr:last-child td{border-bottom:none;}
+.badge{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;border-radius:3px;font-size:11.5px;font-weight:600;white-space:nowrap;}
+.badge.pend{background:#fff8e1;color:#9a6c00;}
+.badge.scru{background:#e3f2fd;color:#1565c0;}
+.badge.appr{background:#e8f5e9;color:#1b5e20;}
+.badge.rejt{background:#ffebee;color:#b71c1c;}
+.badge.info{background:#e0f2f1;color:#00695c;}
+.acts{display:flex;gap:5px;flex-wrap:wrap;}
+.ab{padding:4px 10px;border-radius:3px;font-size:11.5px;font-weight:600;border:none;transition:all .18s;white-space:nowrap;}
+.ab.view{background:#e3f2fd;color:var(--blue);}.ab.view:hover{background:var(--blue);color:#fff;}
+.ab.appr{background:#e8f5e9;color:var(--green);}.ab.appr:hover{background:var(--green);color:#fff;}
+.ab.rejt{background:#ffebee;color:var(--red);}.ab.rejt:hover{background:var(--red);color:#fff;}
+.ab.qry{background:#fff8e1;color:#9a6c00;}.ab.qry:hover{background:var(--accent);color:#fff;}
+.ab.dl{background:#f3e5f5;color:#7b1fa2;}.ab.dl:hover{background:#7b1fa2;color:#fff;}
+.pag{display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-top:1px solid var(--border);}
+.pag-info{font-size:12.5px;color:#888;}
+.pag-btns{display:flex;gap:4px;}
+.pb{width:30px;height:30px;border-radius:4px;border:1px solid #ddd;background:#fff;font-size:13px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.pb:hover,.pb.on{background:var(--green);color:#fff;border-color:var(--green);}
+.btn{padding:8px 16px;border-radius:4px;font-size:13px;font-weight:600;border:none;transition:all .18s;}
+.btn.green{background:var(--green);color:#fff;}.btn.green:hover{background:var(--g2);}
+.btn.blue{background:var(--blue);color:#fff;}.btn.blue:hover{background:#0d47a1;}
+.btn.red{background:var(--red);color:#fff;}.btn.red:hover{background:#b71c1c;}
+.btn.amber{background:var(--accent);color:#fff;}.btn.amber:hover{background:#c8880e;}
+.btn.out{background:#fff;color:var(--green);border:1px solid var(--green);}.btn.out:hover{background:var(--light);}
+.dp{background:#fff;border-radius:6px;border:1px solid var(--border);padding:22px;margin-bottom:18px;box-shadow:var(--shadow);}
+.dp h3{font-size:15px;font-weight:600;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border);color:#111;}
+.dg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.di-lbl{font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.05em;margin-bottom:3px;}
+.di-val{font-size:13.5px;color:#333;font-weight:500;}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;}
+.chart-card{background:#fff;border-radius:6px;border:1px solid var(--border);padding:18px;box-shadow:var(--shadow);}
+.chart-card h4{font-size:14px;font-weight:600;margin-bottom:14px;color:#111;}
+.bar-chart{display:flex;flex-direction:column;gap:9px;}
+.br{display:flex;align-items:center;gap:9px;}
+.br-lbl{font-size:12px;color:#666;width:90px;flex-shrink:0;}
+.br-track{flex:1;height:14px;background:#f0f0f0;border-radius:2px;overflow:hidden;}
+.br-fill{height:100%;border-radius:2px;}
+.br-val{font-size:12px;font-weight:600;color:#444;width:36px;text-align:right;flex-shrink:0;}
+.act-item{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0f0f0;}
+.act-item:last-child{border-bottom:none;}
+.adot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px;}
+.adot.g{background:var(--green);}.adot.b{background:var(--blue);}.adot.r{background:var(--red);}.adot.a{background:var(--accent);}
+.atext{font-size:13px;color:#444;line-height:1.5;}
+.atime{font-size:11.5px;color:#bbb;margin-top:2px;}
+#act-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:7000;display:none;align-items:center;justify-content:center;}
+#act-modal.open{display:flex;}
+.am-box{background:#fff;border-radius:8px;padding:30px;width:480px;max-width:94vw;animation:popIn .25s ease;box-shadow:0 16px 50px rgba(0,0,0,.2);}
+.am-box h3{font-size:18px;font-weight:700;margin-bottom:10px;}
+.am-box p{font-size:13.5px;color:#666;margin-bottom:16px;line-height:1.65;}
+.am-ref{background:var(--light);border:1px solid var(--border);border-radius:4px;padding:10px 16px;font-weight:700;font-size:14px;color:var(--green);margin-bottom:14px;font-family:'IBM Plex Mono',monospace;}
+.am-ta{width:100%;min-height:86px;padding:10px 12px;border:1px solid #ccc;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13px;resize:vertical;outline:none;margin-bottom:14px;}
+.am-ta:focus{border-color:var(--green);}
+.am-actions{display:flex;gap:8px;justify-content:flex-end;}
+#toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:var(--green);color:#fff;padding:12px 20px;border-radius:4px;font-size:13.5px;font-weight:500;box-shadow:0 6px 22px rgba(0,0,0,.18);transform:translateY(60px);opacity:0;transition:all .3s;max-width:340px;}
+#toast.show{transform:translateY(0);opacity:1;}
+#toast.err{background:var(--red);}
+#toast.inf{background:var(--blue);}
+
+/* PDF DOCUMENT PANEL */
+.pdf-result{background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;box-shadow:var(--shadow);}
+.pdf-header{background:linear-gradient(135deg,var(--g2),var(--green));color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;}
+.pdf-header-left{display:flex;align-items:center;gap:12px;}
+.pdf-icon{width:40px;height:40px;background:rgba(255,255,255,.15);border-radius:4px;display:flex;align-items:center;justify-content:center;}
+.pdf-icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.8;}
+.pdf-title{font-size:15px;font-weight:700;letter-spacing:.01em;}
+.pdf-subtitle{font-size:11.5px;opacity:.8;margin-top:2px;}
+.pdf-badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.35);padding:4px 12px;border-radius:3px;font-size:11px;font-weight:700;letter-spacing:.05em;}
+.pdf-body{padding:0;}
+.pdf-section{border-bottom:1px solid #f0f0f0;}
+.pdf-section:last-child{border-bottom:none;}
+.pdf-sec-header{background:#f8fbf8;padding:10px 20px;display:flex;align-items:center;gap:8px;cursor:pointer;transition:background .18s;}
+.pdf-sec-header:hover{background:#eef7f1;}
+.pdf-sec-title{font-size:12px;font-weight:700;color:var(--g2);text-transform:uppercase;letter-spacing:.08em;}
+.pdf-sec-count{font-size:11px;color:#999;margin-left:auto;}
+.pdf-sec-body{padding:16px 20px;}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+.info-grid.two-col{grid-template-columns:repeat(2,1fr);}
+.info-item{}
+.info-item .lbl{font-size:10.5px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;}
+.info-item .val{font-size:13px;color:#222;font-weight:500;line-height:1.4;}
+.info-item .val.mono{font-family:'IBM Plex Mono',monospace;color:var(--green);}
+.info-item .val.amount{font-family:'IBM Plex Mono',monospace;color:var(--g2);font-size:13.5px;}
+.info-item .val.highlight{color:var(--red);font-weight:600;}
+.payment-table{width:100%;border-collapse:collapse;}
+.payment-table th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:#888;letter-spacing:.04em;text-transform:uppercase;border-bottom:1px solid var(--border);background:#f8fbf8;}
+.payment-table td{padding:9px 12px;font-size:13px;border-bottom:1px solid #f5f5f5;}
+.payment-table tr:last-child td{border-bottom:none;}
+.payment-table .charge-name{color:#333;}
+.payment-table .charge-amt{font-family:'IBM Plex Mono',monospace;color:var(--g2);text-align:right;font-weight:500;}
+.payment-total{background:var(--light);border-top:2px solid var(--green);}
+.payment-total td{font-weight:700;color:var(--g2);font-size:14px;}
+.payment-total .charge-amt{font-size:15px;color:var(--g2);}
+.conditions-list{counter-reset:cond;}
+.cond-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #f5f5f5;font-size:13px;color:#444;line-height:1.6;}
+.cond-item:last-child{border-bottom:none;}
+.cond-letter{font-weight:700;color:var(--green);flex-shrink:0;width:16px;}
+.search-hint-empty{text-align:center;padding:50px;color:#aaa;font-size:13px;}
+.search-hint-empty svg{width:40px;height:40px;stroke:#ddd;fill:none;stroke-width:1.5;margin:0 auto 12px;}
+
+@media(max-width:960px){
+  .stat-row{grid-template-columns:1fr 1fr;}
+  .sal-grid,.contact-grid,.foot-grid{grid-template-columns:1fr;}
+  .so-grid{grid-template-columns:1fr 1fr;}
+  .chart-row,.dg,.info-grid{grid-template-columns:1fr 1fr;}
+  .sidebar{display:none;}
+}
+@media(max-width:600px){
+  .nav-item:not(.nav-login):not(.nav-apply){display:none;}
+  .so-grid,.stat-row{grid-template-columns:1fr;}
+  #hero{height:280px;}
+  .slide-content h1{font-size:28px;}
+  .slide-content{padding:0 22px;}
+  .section{padding:38px 18px;}
+  .frow{grid-template-columns:1fr;}
+  .info-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- PUBLIC SITE -->
+<div id="site-wrap">
+<div id="util-bar">
+  <span id="pub-clock">—</span>
+  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+    <a href="tel:18005992266">1800-599 22 66</a><span class="u-sep">|</span>
+    <a href="tel:04022666666">040-22 66 66 66</a><span class="u-sep">|</span>
+    <a href="#">FAQS</a><span class="u-sep">|</span>
+    <a href="#contact-section">SUPPORT</a><span class="u-sep">|</span>
+    <a href="#contact-section">GRIEVANCE</a><span class="u-sep">|</span>
+    <span>LANGUAGE</span><span class="u-sep">|</span>
+    <div class="fz-btns">
+      <button class="fz-btn" onclick="chFz(-1)">A-</button>
+      <button class="fz-btn" onclick="chFz(0)">A</button>
+      <button class="fz-btn" onclick="chFz(1)">A+</button>
+    </div>
+  </div>
+</div>
+
+<div id="site-header">
+  <img src="logo.png" class="hdr-emblem" alt="TG-bPASS Logo"
+       onerror="this.style.display='none';document.getElementById('hdr-svg-fb').style.display='block'">
+  <svg id="hdr-svg-fb" class="hdr-emblem" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+    <circle cx="30" cy="30" r="28" fill="none" stroke="#1a7a3c" stroke-width="2"/>
+    <circle cx="30" cy="30" r="22" fill="none" stroke="#1a7a3c" stroke-width="1"/>
+    <path d="M30 8 L32 20 L30 22 L28 20 Z" fill="#1a7a3c"/>
+    <path d="M22 30 C22 24 26 20 30 20 C34 20 38 24 38 30 C38 36 34 40 30 40 C26 40 22 36 22 30Z" fill="none" stroke="#1a7a3c" stroke-width="1.5"/>
+    <circle cx="30" cy="30" r="4" fill="#1a7a3c"/>
+    <text x="30" y="52" text-anchor="middle" font-size="5" font-family="IBM Plex Sans" fill="#1a7a3c" font-weight="700" letter-spacing="0.5">TELANGANA</text>
+    <path d="M14 44 Q30 50 46 44" fill="none" stroke="#1a7a3c" stroke-width="1"/>
+  </svg>
+  <div class="hdr-divider"></div>
+  <div class="hdr-text">
+    <div class="t1">Telangana Building Permission Approval &amp; Self Certification System</div>
+    <div class="t2">TG-bPASS — GOVERNMENT OF TELANGANA</div>
+    <div class="t3">Municipal Administration &amp; Urban Development Department</div>
+  </div>
+</div>
+
+<nav id="main-nav">
+  <div class="nav-inner">
+    <span class="nav-home" onclick="scrollTo({top:0,behavior:'smooth'})">HOME</span>
+    <div class="nav-item">ABOUT TG-bPASS <span class="arr">▾</span>
+      <div class="drop">
+        <a href="javascript:void(0)" onclick="scrollId('welcome-section')">About the System</a>
+        <a href="javascript:void(0)" onclick="scrollId('salient-section')">Salient Features</a>
+        <a href="javascript:void(0)" onclick="scrollId('standout-section')">Stand-out Features</a>
+      </div>
+    </div>
+    <div class="nav-item">INFORMATION <span class="arr">▾</span>
+      <div class="drop">
+        <a href="javascript:void(0)" onclick="scrollId('welcome-section')">Overview</a>
+        <a href="javascript:void(0)" onclick="scrollId('salient-section')">Guidelines</a>
+        <a href="javascript:void(0)">Circulars &amp; Notifications</a>
+        <a href="javascript:void(0)">Acts &amp; Rules</a>
+      </div>
+    </div>
+    <div class="nav-item">RESOURCES <span class="arr">▾</span>
+      <div class="drop">
+        <a href="javascript:void(0)">Application Forms</a>
+        <a href="javascript:void(0)">Checklists</a>
+        <a href="javascript:void(0)">User Manual (PDF)</a>
+        <a href="javascript:void(0)">FAQs</a>
+      </div>
+    </div>
+    <div class="nav-item" onclick="showToast('DCR Portal coming soon.')">DCR PORTAL</div>
+    <div class="nav-item">SEARCH <span class="arr">▾</span>
+      <div class="drop">
+        <a href="javascript:void(0)" onclick="scrollId('contact-section')">Track Application</a>
+        <a href="javascript:void(0)">Search by Survey No.</a>
+        <a href="javascript:void(0)">Verify Permission Letter</a>
+      </div>
+    </div>
+    <div class="nav-item">COMPLAINTS <span class="arr">▾</span>
+      <div class="drop">
+        <a href="javascript:void(0)" onclick="scrollId('contact-section')">File a Complaint</a>
+        <a href="javascript:void(0)">Track Complaint Status</a>
+      </div>
+    </div>
+    <button class="nav-login" onclick="openLogin()">LOGIN ▾</button>
+    <button class="nav-apply" onclick="openLogin()">APPLY NOW</button>
+  </div>
+</nav>
+
+<div id="news-bar">
+  <div class="news-lbl">NEWS</div>
+  <div class="ticker-track">
+    <div class="ticker-inner">
+      <span>TG-bPASS: Instant online building permission for plot size up to 500 sq.m &amp; height up to 10 meters (Residential)</span>
+      <span>Occupancy Certificate processing now available online across all 33 ULBs in Telangana</span>
+      <span>First-of-its-kind in India — single-window system for all building NOCs via Common Application Form</span>
+      <span>New: Land use certificate &amp; Land conversion certificate processing now live on TG-bPASS</span>
+      <span>TG-bPASS: Instant online building permission for plot size up to 500 sq.m &amp; height up to 10 meters (Residential)</span>
+      <span>Occupancy Certificate processing now available online across all 33 ULBs in Telangana</span>
+      <span>First-of-its-kind in India — single-window system for all building NOCs via Common Application Form</span>
+      <span>New: Land use certificate &amp; Land conversion certificate processing now live on TG-bPASS</span>
+    </div>
+  </div>
+</div>
+
+<div id="hero">
+  <div class="slide active" id="slide-0">
+    <img class="slide-img" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1400&q=80" alt="Residential Building">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Residential Permits</div>
+      <h1>TG-bPASS</h1>
+      <div style="width:54px;height:3px;background:var(--accent);margin:10px 0 14px;border-radius:2px;"></div>
+      <p>Telangana Building Permission Approval and Self-Certification System — instant online approvals for residential buildings up to 500 sq.m.</p>
+      <div class="slide-btns">
+        <button class="sbtn-white" onclick="openLogin()">Apply Now</button>
+        <button class="sbtn-outline" onclick="scrollId('welcome-section')">Learn More</button>
+      </div>
+    </div>
+  </div>
+  <div class="slide" id="slide-1">
+    <img class="slide-img" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80" alt="Commercial Building">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Commercial &amp; Industrial</div>
+      <h1>Build Faster,<br>Build Smarter</h1>
+      <div style="width:54px;height:3px;background:var(--accent);margin:10px 0 14px;border-radius:2px;"></div>
+      <p>Single-window platform for commercial &amp; industrial building permissions. Get all NOCs from one portal using the Common Application Form.</p>
+      <div class="slide-btns">
+        <button class="sbtn-white" onclick="openLogin()">Apply Now</button>
+        <button class="sbtn-outline" onclick="scrollId('salient-section')">View Features</button>
+      </div>
+    </div>
+  </div>
+  <div class="slide" id="slide-2">
+    <img class="slide-img" src="https://images.unsplash.com/photo-1605649487212-47bdab064df7?w=1400&q=80" alt="Hyderabad Skyline">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">Government of Telangana</div>
+      <h1>Digital Telangana,<br>Transparent Governance</h1>
+      <div style="width:54px;height:3px;background:var(--accent);margin:10px 0 14px;border-radius:2px;"></div>
+      <p>A fully online, paperless, time-bound system ensuring 21-day approval SLA. No office visits. No hidden delays. Track every step live.</p>
+      <div class="slide-btns">
+        <button class="sbtn-white" onclick="openLogin()">Get Started</button>
+        <button class="sbtn-outline" onclick="scrollId('contact-section')">Contact Us</button>
+      </div>
+    </div>
+  </div>
+  <div class="slide" id="slide-3">
+    <img class="slide-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1400&q=80" alt="Construction Site">
+    <div class="slide-overlay"></div>
+    <div class="slide-content">
+      <div class="slide-tag">3-Step Process</div>
+      <h1>Apply. Upload.<br>Get Permitted.</h1>
+      <div style="width:54px;height:3px;background:var(--accent);margin:10px 0 14px;border-radius:2px;"></div>
+      <p>Simplified 3-step process for building permissions. Fill the application, upload documents, and receive your digitally signed permission letter.</p>
+      <div class="slide-btns">
+        <button class="sbtn-white" onclick="openLogin()">Apply Now</button>
+        <button class="sbtn-outline" onclick="scrollId('standout-section')">How It Works</button>
+      </div>
+    </div>
+  </div>
+  <button class="slide-arrow" id="prev-slide" onclick="moveSlide(-1)">&#8249;</button>
+  <button class="slide-arrow" id="next-slide" onclick="moveSlide(1)">&#8250;</button>
+  <div class="slide-dots" id="slide-dots">
+    <div class="sdot on" onclick="goSlide(0)"></div>
+    <div class="sdot" onclick="goSlide(1)"></div>
+    <div class="sdot" onclick="goSlide(2)"></div>
+    <div class="sdot" onclick="goSlide(3)"></div>
+  </div>
+</div>
+
+<div id="welcome-section" class="section" style="background:#fff;border-bottom:1px solid var(--border);">
+  <div class="sec-title">Welcome to TG-bPASS</div>
+  <div class="sec-dept">Municipal Administration and Urban Development Department</div>
+  <p class="sec-body">Government of Telangana has enacted new Municipalities Act "Telangana Municipalities Act 2019" to improve compliance with laws by citizens, increase accountability among officials, eliminate corrupt practices with an overall aim of delivering effective services to people living in urban areas of the State by consolidating and providing for the constitution of Municipalities in accordance with part IX-A of the Indian Constitution.</p>
+  <p class="sec-body">Government of Telangana in tune with the Telangana Municipalities Act, 2019 has launched TG-bPASS, a single integrated platform for processing of various permissions required during development of land and construction of buildings through self-certification system. It is also designed to provide the services within stipulated timelines.</p>
+</div>
+
+<div id="salient-section" class="section" style="background:#fafafa;border-bottom:1px solid var(--border);">
+  <div class="sec-title">Salient Features</div>
+  <div class="sal-grid" style="margin-top:24px;">
+    <div class="sal-col"><ul>
+      <li>For plot size up to 75 square yards — no building permission or occupancy certificate required.</li>
+      <li>For plot size up to 500 sq.m and height up to 10 meters (Residential) — instant building permission through online self-certification.</li>
+      <li>For plot size above 500 sq.m and height above 10 meters — single window system for obtaining multiple NOCs.</li>
+    </ul></div>
+    <div class="sal-col"><ul>
+      <li>Processing of tentative layout approval applications through online self-certification.</li>
+      <li>Processing of Occupancy Certificate for non-high-rise and high-rise buildings.</li>
+      <li>Processing of Land use certificates and Land conversion certificates.</li>
+      <li>Post verification of all permissions issued by the system.</li>
+    </ul></div>
+  </div>
+</div>
+
+<div id="standout-section" class="section" style="background:var(--light);border-bottom:1px solid var(--border);">
+  <div class="sec-title">Stand-out Features</div>
+  <div class="so-grid" style="margin-top:26px;">
+    <div class="so-card">
+      <div class="so-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <h3>Online Application</h3><p>Citizens can fill and submit the application online with required documents from any device.</p>
+    </div>
+    <div class="so-card">
+      <div class="so-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
+      <h3>Simplified Process</h3><p>Citizens can obtain NOC from all line departments using a single Common Application Form.</p>
+    </div>
+    <div class="so-card">
+      <div class="so-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>
+      <h3>Safe &amp; Secure</h3><p>All transactions on the website are encrypted and digitally signed — fully secure.</p>
+    </div>
+    <div class="so-card">
+      <div class="so-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <h3>3-Step Process</h3><p>Citizens can obtain permissions in 3 easy steps — applying, uploading documents, and paying.</p>
+    </div>
+    <div class="so-card">
+      <div class="so-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <h3>First of its Kind</h3><p>First government in India to provide complete online services with zero touchpoint.</p>
+    </div>
+    <div class="so-card">
+      <div class="so-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg></div>
+      <h3>Mobile Responsive</h3><p>Citizens can access all services through desktop, tablet and mobile with internet connection.</p>
+    </div>
+  </div>
+</div>
+
+<div id="contact-section" class="section" style="background:#fff;">
+  <div class="sec-title">Contact Us</div>
+  <div class="contact-grid" style="margin-top:26px;">
+    <div class="c-box">
+      <h3>Contact Us</h3>
+      <div class="frow">
+        <div class="fld"><label>First Name</label><input id="cf1" placeholder="Enter first name"></div>
+        <div class="fld"><label>Last Name</label><input id="cf2" placeholder="Enter last name"></div>
+      </div>
+      <div class="fld"><label>Email Address</label><input id="cf3" type="email" placeholder="Enter email address"></div>
+      <div class="fld"><label>Mobile Number</label><input id="cf4" placeholder="Enter mobile number"></div>
+      <div class="fld"><label>Message</label><textarea id="cf5" placeholder="Type your message here..."></textarea></div>
+      <div class="captcha-row">
+        <input type="checkbox" id="robot" style="width:16px;height:16px;cursor:pointer;">
+        <label for="robot" style="cursor:pointer;font-size:13px;">I'm not a robot</label>
+      </div>
+      <button class="sub-btn" onclick="submitContact()">SUBMIT</button>
+    </div>
+    <div class="c-box">
+      <h3>Address</h3>
+      <div class="info-row"><div class="info-lbl">Office</div><div class="info-val">5th Floor, ENC (Ph) Building, MA&amp;UD Campus, Kishana Building Complex, Opp. PTI Building, AC Guards, Masab Tank, Hyderabad – 500004.</div></div>
+      <div class="info-row"><div class="info-lbl">Email Address</div><div class="info-val"><a href="#">tg-bpass-support[at]telangana[dot]gov[dot]in</a></div></div>
+      <div class="info-row"><div class="info-lbl">Mobile Number</div><div class="info-val"><strong>040-22 66 66 66</strong></div></div>
+      <div class="info-row"><div class="info-lbl">Hours of Operations</div><div class="info-val">10:00 AM to 6:00 PM IST — Mon to Sat</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="site-footer">
+  <div class="foot-grid">
+    <div class="foot-col"><h4>Departments</h4><a>Telangana Portal</a><a>GHMC</a><a>DTCP</a><a>HMDA</a></div>
+    <div class="foot-col"><h4>Support</h4><a>Help</a><a>FAQs</a><a onclick="scrollId('contact-section')">Contact Us</a><a>Privacy Policy</a></div>
+    <div class="foot-col">
+      <h4>Follow Us</h4>
+      <div class="foot-social">
+        <div class="s-btn" style="background:#000;color:#fff;font-size:11px;font-weight:700;">X</div>
+        <div class="s-btn" style="background:#e1306c;color:#fff;font-size:11px;font-weight:700;">IG</div>
+        <div class="s-btn" style="background:red;color:#fff;font-size:11px;font-weight:700;">YT</div>
+        <div class="s-btn" style="background:#25d366;color:#fff;font-size:11px;font-weight:700;">WA</div>
+        <div class="s-btn" style="background:#1877f2;color:#fff;font-size:11px;font-weight:700;">FB</div>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>TG-bPASS</h4>
+      <div style="font-size:12.5px;color:#666;line-height:1.75;">5th Floor, ENC Building,<br>MA&amp;UD Campus, Masab Tank,<br>Hyderabad – 500004.<br><br><strong style="color:#aaa;">1800-599-22-66</strong></div>
+    </div>
+  </div>
+  <div class="foot-bottom">COPYRIGHT &copy;2026 TELANGANA BUILDING PERMISSION APPROVAL AND SELF CERTIFICATION SYSTEM. ALL RIGHTS RESERVED.</div>
+</div>
+</div><!-- /site-wrap -->
+
+<!-- LOGIN MODAL -->
+<div id="login-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeLogin()">&#10005;</button>
+    <div class="modal-logo">TG-bPASS</div>
+    <h2>Sign In</h2>
+    <p class="modal-sub">Access your TG-bPASS account</p>
+    <div style="background:#f0f8f4;border:1px solid var(--border);border-radius:4px;padding:8px 14px;margin-bottom:16px;font-size:12px;color:#555;line-height:1.7;">
+      <strong style="color:var(--g2);display:block;margin-bottom:2px;">Login Credentials</strong>
+      Email: <span style="font-family:'IBM Plex Mono',monospace;color:var(--green);">charanacharya08@tgbpass.com</span><br>
+      Password: <span style="font-family:'IBM Plex Mono',monospace;color:var(--green);">Charan123</span>
+    </div>
+    <div class="tab-row">
+      <button class="tab-btn on" id="tb-o" onclick="switchTab('o')">Officer</button>
+      <button class="tab-btn" id="tb-c" onclick="switchTab('c')">Citizen</button>
+      <button class="tab-btn" id="tb-a" onclick="switchTab('a')">Architect</button>
+    </div>
+    <div class="err-box" id="login-err">Invalid credentials. Please try again.</div>
+    <div class="fld"><label>Email / Username</label><input id="l-user" placeholder="Enter your email"></div>
+    <div class="fld"><label>Password</label><input type="password" id="l-pass" placeholder="Enter password"></div>
+    <div class="fld-forgot">Forgot Password?</div>
+    <button class="login-btn" onclick="doLogin()">SIGN IN</button>
+    <p style="text-align:center;margin-top:14px;font-size:12.5px;color:#999;">New applicant? <span style="color:var(--green);cursor:pointer;font-weight:600;">Register as Citizen</span></p>
+  </div>
+</div>
+
+<!-- OFFICER DASHBOARD -->
+<div id="dash-wrap">
+  <div class="dash-top">
+    <div class="dt-left">
+      <span style="font-weight:600;letter-spacing:.04em;">TG-bPASS OFFICER PORTAL</span>
+      <span style="color:#2a4a32;">|</span>
+      <span id="dash-clock">—</span>
+    </div>
+    <div class="dt-right">
+      <button class="notif-btn" onclick="showToast('You have 5 pending notifications','inf')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        <span class="nbadge">5</span>
+      </button>
+      <span>Welcome, <strong style="color:#a8c9b0;">Charan Acharya</strong></span>
+      <button class="logout-btn" onclick="doLogout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="dash-header">
+    <div class="dash-brand">
+      <img src="logo.png" class="dash-emblem" alt="TG-bPASS Logo"
+           onerror="this.style.display='none';document.getElementById('dash-svg-fb').style.display='block'">
+      <svg id="dash-svg-fb" class="dash-emblem" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" style="display:none;">
+        <circle cx="21" cy="21" r="19" fill="none" stroke="#1a7a3c" stroke-width="1.5"/>
+        <circle cx="21" cy="21" r="14" fill="none" stroke="#1a7a3c" stroke-width="1"/>
+        <path d="M21 6 L22.5 15 L21 16.5 L19.5 15 Z" fill="#1a7a3c"/>
+        <circle cx="21" cy="21" r="3" fill="#1a7a3c"/>
+        <text x="21" y="36" text-anchor="middle" font-size="4" font-family="IBM Plex Sans" fill="#1a7a3c" font-weight="700" letter-spacing="0.3">TELANGANA</text>
+      </svg>
+      <div>
+        <div class="db-title">TG-bPASS — Officer Dashboard</div>
+        <div class="db-sub">Telangana Building Permission Approval &amp; Self Certification System</div>
+      </div>
+    </div>
+    <div class="officer-chip">
+      <div class="officer-av">CA</div>
+      <div>
+        <div class="officer-name">Charan Acharya</div>
+        <div class="officer-role">Building Permission Officer · GHMC Zone 4</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dash-layout">
+    <div class="sidebar">
+      <div class="sb-section">
+        <div class="sb-heading">Main</div>
+        <div class="sb-item active" data-view="v-dashboard">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+          Dashboard
+        </div>
+        <div class="sb-item" data-view="v-all">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
+          All Applications <span class="sb-badge red">142</span>
+        </div>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-section">
+        <div class="sb-heading">Review Queue</div>
+        <div class="sb-item" data-view="v-pending">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
+          Pending Review <span class="sb-badge amber">38</span>
+        </div>
+        <div class="sb-item" data-view="v-scrutiny">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+          Under Scrutiny <span class="sb-badge blue">21</span>
+        </div>
+        <div class="sb-item" data-view="v-approved">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+          Approved <span class="sb-badge green">67</span>
+        </div>
+        <div class="sb-item" data-view="v-rejected">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+          Rejected <span class="sb-badge red">16</span>
+        </div>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-section">
+        <div class="sb-heading">Tools</div>
+        <div class="sb-item" data-view="v-search">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+          Search Documents
+        </div>
+        <div class="sb-item" data-view="v-reports">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span>
+          Reports &amp; Analytics
+        </div>
+        <div class="sb-item" data-view="v-activity">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg></span>
+          Activity Log
+        </div>
+      </div>
+      <div class="sb-divider"></div>
+      <div class="sb-section">
+        <div class="sb-heading">Account</div>
+        <div class="sb-item" data-view="v-profile">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+          My Profile
+        </div>
+        <div class="sb-item" data-view="v-settings">
+          <span class="sb-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></span>
+          Settings
+        </div>
+      </div>
+    </div>
+
+    <div class="dash-main">
+
+      <!-- DASHBOARD -->
+      <div class="dview active" id="v-dashboard">
+        <div class="phdr">
+          <div><h2>Dashboard Overview</h2><div class="bc">Home / Dashboard</div></div>
+          <div class="phdr-actions">
+            <span style="font-size:12.5px;color:#888;">Today: <strong id="today-lbl" style="color:#333;">—</strong></span>
+            <button class="btn out" onclick="activateView('v-all')">View All Applications</button>
+          </div>
+        </div>
+        <div class="stat-row">
+          <div class="scard blue"><div class="si"><svg viewBox="0 0 24 24"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></div><div class="sv">142</div><div class="sl">Total Applications</div><div class="ss">+12 this week</div></div>
+          <div class="scard amber"><div class="si"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="sv">38</div><div class="sl">Pending Review</div><div class="ss">8 overdue SLA</div></div>
+          <div class="scard green"><div class="si"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="sv">67</div><div class="sl">Approved</div><div class="ss">+5 today</div></div>
+          <div class="scard red"><div class="si"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><div class="sv">16</div><div class="sl">Rejected</div><div class="ss">11.2% rejection rate</div></div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h4>Applications by Building Type</h4>
+            <div class="bar-chart">
+              <div class="br"><div class="br-lbl">Residential</div><div class="br-track"><div class="br-fill" style="width:72%;background:var(--green);"></div></div><div class="br-val">103</div></div>
+              <div class="br"><div class="br-lbl">Commercial</div><div class="br-track"><div class="br-fill" style="width:22%;background:var(--blue);"></div></div><div class="br-val">31</div></div>
+              <div class="br"><div class="br-lbl">Industrial</div><div class="br-track"><div class="br-fill" style="width:6%;background:var(--accent);"></div></div><div class="br-val">8</div></div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h4>Status Distribution</h4>
+            <div class="bar-chart">
+              <div class="br"><div class="br-lbl">Approved</div><div class="br-track"><div class="br-fill" style="width:47%;background:var(--green);"></div></div><div class="br-val">67</div></div>
+              <div class="br"><div class="br-lbl">Pending</div><div class="br-track"><div class="br-fill" style="width:27%;background:var(--accent);"></div></div><div class="br-val">38</div></div>
+              <div class="br"><div class="br-lbl">Scrutiny</div><div class="br-track"><div class="br-fill" style="width:15%;background:var(--blue);"></div></div><div class="br-val">21</div></div>
+              <div class="br"><div class="br-lbl">Rejected</div><div class="br-track"><div class="br-fill" style="width:11%;background:var(--red);"></div></div><div class="br-val">16</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="tc">
+          <div class="tc-head"><div class="tc-title">Recent Applications</div><button class="btn out" onclick="activateView('v-all')">View All</button></div>
+          <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Type</th><th>ULB</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="recent-tb"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ALL APPLICATIONS -->
+      <div class="dview" id="v-all">
+        <div class="phdr">
+          <div><h2>All Applications</h2><div class="bc">Home / All Applications</div></div>
+          <div class="phdr-actions"><button class="btn green" onclick="showToast('Exporting CSV...')">Export CSV</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-head">
+            <div class="tc-title">Total: <strong>142</strong> applications</div>
+            <div class="filters">
+              <div class="sbox"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input id="app-q" placeholder="Search name, ref, mobile..." oninput="filterApps()"></div>
+              <select class="fsel" id="app-sf" onchange="filterApps()"><option value="">All Status</option><option>Pending</option><option>Under Scrutiny</option><option>Approved</option><option>Rejected</option></select>
+              <select class="fsel" id="app-tf" onchange="filterApps()"><option value="">All Types</option><option>Residential</option><option>Commercial</option><option>Industrial</option></select>
+            </div>
+          </div>
+          <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Mobile</th><th>Type</th><th>Area</th><th>ULB</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="all-tb"></tbody></table>
+          <div class="pag"><div class="pag-info">Showing 1–12 of 142 applications</div><div class="pag-btns"><button class="pb">&#8249;</button><button class="pb on">1</button><button class="pb">2</button><button class="pb">3</button><button class="pb">&#8250;</button></div></div>
+        </div>
+      </div>
+
+      <!-- PENDING -->
+      <div class="dview" id="v-pending">
+        <div class="phdr"><div><h2>Pending Review</h2><div class="bc">Home / Pending Review</div></div></div>
+        <div class="tc">
+          <div class="tc-head"><div class="tc-title">Awaiting Review — <strong style="color:var(--accent);">38</strong> applications</div></div>
+          <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Type</th><th>Plot Area</th><th>Submitted</th><th>SLA Remaining</th><th>Actions</th></tr></thead>
+          <tbody id="pend-tb"></tbody></table>
+        </div>
+      </div>
+
+      <!-- SCRUTINY -->
+      <div class="dview" id="v-scrutiny">
+        <div class="phdr"><div><h2>Under Scrutiny</h2><div class="bc">Home / Under Scrutiny</div></div></div>
+        <div class="tc">
+          <div class="tc-head"><div class="tc-title">Technical Scrutiny — <strong style="color:var(--blue);">21</strong> applications</div></div>
+          <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Type</th><th>Plot Area</th><th>Started</th><th>Scrutiny Officer</th><th>Actions</th></tr></thead>
+          <tbody id="scru-tb"></tbody></table>
+        </div>
+      </div>
+
+      <!-- APPROVED -->
+      <div class="dview" id="v-approved">
+        <div class="phdr">
+          <div><h2>Approved Applications</h2><div class="bc">Home / Approved</div></div>
+          <div class="phdr-actions"><button class="btn green" onclick="showToast('Downloading all permission letters...')">Bulk Download</button></div>
+        </div>
+        <div class="tc">
+          <div class="tc-head"><div class="tc-title">Approved — <strong style="color:var(--green);">67</strong> applications</div></div>
+          <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Type</th><th>Plot Area</th><th>Approved On</th><th>Validity</th><th>Actions</th></tr></thead>
+          <tbody id="appr-tb"></tbody></table>
+        </div>
+      </div>
+
+      <!-- REJECTED -->
+      <div class="dview" id="v-rejected">
+        <div class="phdr"><div><h2>Rejected Applications</h2><div class="bc">Home / Rejected</div></div></div>
+        <div class="tc">
+          <div class="tc-head"><div class="tc-title">Rejected — <strong style="color:var(--red);">16</strong> applications</div></div>
+          <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Type</th><th>Rejected On</th><th>Reason</th><th>Actions</th></tr></thead>
+          <tbody id="rejt-tb"></tbody></table>
+        </div>
+      </div>
+
+      <!-- SEARCH DOCUMENTS -->
+      <div class="dview" id="v-search">
+        <div class="phdr"><div><h2>Search Documents</h2><div class="bc">Home / Search Documents</div></div></div>
+        <div class="dp">
+          <h3>Search by Ref No. / Applicant Name / Survey No. / Document Type</h3>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;">
+            <div style="flex:1;min-width:240px;">
+              <input id="doc-q" placeholder="Try: KATURI, 53764, 199/8, Kapra, Venkateswarlu..."
+                style="width:100%;padding:10px 14px;border:1px solid #ccc;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .2s;"
+                onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#ccc'"
+                onkeydown="if(event.key==='Enter')searchDocs()">
+            </div>
+            <select class="fsel" id="doc-type" style="padding:10px 14px;font-size:13.5px;">
+              <option>All Document Types</option>
+              <option>Building Permission Letter</option>
+              <option>Title Deed</option>
+              <option>Layout Plan</option>
+              <option>Architect Drawing</option>
+              <option>Pattadar Passbook</option>
+            </select>
+            <button class="btn green" style="padding:10px 22px;font-size:14px;" onclick="searchDocs()">Search</button>
+          </div>
+          <div id="search-out">
+            <div class="search-hint-empty">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <div>Enter a keyword to search permit documents</div>
+              <div style="font-size:12px;color:#bbb;margin-top:6px;">Try searching: KATURI, 53764/KAPRA/0994/2025, Survey No. 199/8, or Kapra Municipality</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REPORTS -->
+      <div class="dview" id="v-reports">
+        <div class="phdr">
+          <div><h2>Reports &amp; Analytics</h2><div class="bc">Home / Reports</div></div>
+          <div class="phdr-actions"><button class="btn green" onclick="showToast('Generating PDF report...')">Export PDF</button></div>
+        </div>
+        <div class="stat-row">
+          <div class="scard blue"><div class="si"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="sv">23</div><div class="sl">This Month</div><div class="ss">+18% vs last month</div></div>
+          <div class="scard green"><div class="si"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="sv">14.2</div><div class="sl">Avg. Approval Days</div><div class="ss">Within 21-day SLA</div></div>
+          <div class="scard amber"><div class="si"><svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div><div class="sv">8</div><div class="sl">SLA Breaches YTD</div><div class="ss">-3 vs last quarter</div></div>
+          <div class="scard red"><div class="si"><svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div><div class="sv">11.2%</div><div class="sl">Rejection Rate</div><div class="ss">Industry avg: 14%</div></div>
+        </div>
+        <div class="chart-row">
+          <div class="chart-card">
+            <h4>Monthly Applications — 2026</h4>
+            <div class="bar-chart">
+              <div class="br"><div class="br-lbl">January</div><div class="br-track"><div class="br-fill" style="width:55%;background:var(--blue);"></div></div><div class="br-val">18</div></div>
+              <div class="br"><div class="br-lbl">February</div><div class="br-track"><div class="br-fill" style="width:58%;background:var(--blue);"></div></div><div class="br-val">19</div></div>
+              <div class="br"><div class="br-lbl">March</div><div class="br-track"><div class="br-fill" style="width:70%;background:var(--blue);"></div></div><div class="br-val">23</div></div>
+            </div>
+          </div>
+          <div class="chart-card">
+            <h4>Approval Rate by ULB</h4>
+            <div class="bar-chart">
+              <div class="br"><div class="br-lbl">GHMC</div><div class="br-track"><div class="br-fill" style="width:88%;background:var(--green);"></div></div><div class="br-val">88%</div></div>
+              <div class="br"><div class="br-lbl">Warangal</div><div class="br-track"><div class="br-fill" style="width:82%;background:var(--green);"></div></div><div class="br-val">82%</div></div>
+              <div class="br"><div class="br-lbl">Nizamabad</div><div class="br-track"><div class="br-fill" style="width:79%;background:var(--green);"></div></div><div class="br-val">79%</div></div>
+              <div class="br"><div class="br-lbl">Karimnagar</div><div class="br-track"><div class="br-fill" style="width:91%;background:var(--green);"></div></div><div class="br-val">91%</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ACTIVITY -->
+      <div class="dview" id="v-activity">
+        <div class="phdr"><div><h2>Activity Log</h2><div class="bc">Home / Activity Log</div></div></div>
+        <div class="dp"><h3>Recent Actions — Charan Acharya</h3><div id="activity-list"></div></div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="dview" id="v-profile">
+        <div class="phdr"><div><h2>My Profile</h2><div class="bc">Home / Profile</div></div></div>
+        <div class="dp">
+          <h3>Officer Information</h3>
+          <div style="display:flex;align-items:center;gap:18px;margin-bottom:26px;">
+            <div style="width:64px;height:64px;border-radius:4px;background:var(--g2);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;flex-shrink:0;letter-spacing:.04em;">CA</div>
+            <div>
+              <div style="font-size:20px;font-weight:700;">Charan Acharya</div>
+              <div style="font-size:13px;color:#888;margin-top:2px;">Building Permission Officer · GHMC Zone 4</div>
+              <div style="margin-top:8px;display:flex;gap:8px;">
+                <span class="badge appr">Active</span>
+                <span class="badge info">GHMC</span>
+              </div>
+            </div>
+          </div>
+          <div class="dg">
+            <div><div class="di-lbl">Employee ID</div><div class="di-val">TGB-OFF-2024-0842</div></div>
+            <div><div class="di-lbl">Email</div><div class="di-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23404b4251424d42404b42515a42131b63574441534250500d404c4e">[email&#160;protected]</a></div></div>
+            <div><div class="di-lbl">Mobile</div><div class="di-val">+91 98765 43210</div></div>
+            <div><div class="di-lbl">Designation</div><div class="di-val">Building Permission Officer</div></div>
+            <div><div class="di-lbl">Jurisdiction</div><div class="di-val">GHMC — Zone 4 (Secunderabad)</div></div>
+            <div><div class="di-lbl">Joined</div><div class="di-val">12 August 2024</div></div>
+            <div><div class="di-lbl">Cases Handled</div><div class="di-val">142 applications</div></div>
+            <div><div class="di-lbl">Approval Rate</div><div class="di-val">88.7%</div></div>
+            <div><div class="di-lbl">Avg. Processing</div><div class="di-val">14.2 days</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="dview" id="v-settings">
+        <div class="phdr"><div><h2>Settings</h2><div class="bc">Home / Settings</div></div></div>
+        <div class="dp">
+          <h3>Account Settings</h3>
+          <div class="fld"><label>Display Name</label><input value="Charan Acharya"></div>
+          <div class="fld"><label>Email</label><input value="charanacharya08@tgbpass.com"></div>
+          <div class="fld"><label>Mobile</label><input value="+91 98765 43210"></div>
+          <div class="fld"><label>New Password</label><input type="password" placeholder="Leave blank to keep current"></div>
+          <div class="fld"><label>Confirm Password</label><input type="password" placeholder="Confirm new password"></div>
+          <button class="sub-btn" onclick="showToast('Settings saved successfully!')">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- DETAIL (dynamic) -->
+      <div class="dview" id="v-detail"></div>
+    </div>
+  </div>
+</div><!-- /dash-wrap -->
+
+<!-- ACTION MODAL -->
+<div id="act-modal">
+  <div class="am-box">
+    <h3 id="am-title">Confirm Action</h3>
+    <p id="am-desc"></p>
+    <div class="am-ref" id="am-ref"></div>
+    <textarea class="am-ta" id="am-remarks" placeholder="Add remarks..."></textarea>
+    <div class="am-actions">
+      <button class="btn" style="background:#f0f0f0;color:#333;" onclick="closeActModal()">Cancel</button>
+      <button class="btn green" id="am-ok" onclick="confirmAction()">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+/* ── APPLICATION DATA ── */
+const APPS=[
+  {ref:'TGB-2026-10421',name:'Ravi Kumar Reddy',   mob:'9876543210',type:'Residential',area:'220 sq.m',ulb:'GHMC',          date:'01 Mar 2026',status:'Approved',   reason:''},
+  {ref:'TGB-2026-10422',name:'Lakshmi Devi',        mob:'9988776655',type:'Commercial', area:'480 sq.m',ulb:'Warangal MC',   date:'02 Mar 2026',status:'Pending',    reason:''},
+  {ref:'TGB-2026-10423',name:'Suresh Babu',         mob:'9123456789',type:'Residential',area:'150 sq.m',ulb:'GHMC',          date:'03 Mar 2026',status:'Approved',   reason:''},
+  {ref:'TGB-2026-10424',name:'Anjali Sharma',       mob:'9000112233',type:'Commercial', area:'600 sq.m',ulb:'Nizamabad MC',  date:'04 Mar 2026',status:'Rejected',   reason:'Incomplete layout plan submitted'},
+  {ref:'TGB-2026-10425',name:'Venkat Rao Naidu',   mob:'9111223344',type:'Residential',area:'300 sq.m',ulb:'Karimnagar MC', date:'05 Mar 2026',status:'Under Scrutiny',reason:''},
+  {ref:'TGB-2026-10426',name:'Priya Krishnamurthy',mob:'9222334455',type:'Residential',area:'175 sq.m',ulb:'GHMC',          date:'06 Mar 2026',status:'Pending',    reason:''},
+  {ref:'TGB-2026-10427',name:'Mohammed Saleem',    mob:'9333445566',type:'Industrial', area:'900 sq.m',ulb:'Warangal MC',   date:'07 Mar 2026',status:'Pending',    reason:''},
+  {ref:'TGB-2026-10428',name:'Kavitha Reddy',       mob:'9444556677',type:'Residential',area:'120 sq.m',ulb:'GHMC',          date:'08 Mar 2026',status:'Approved',   reason:''},
+  {ref:'TGB-2026-10429',name:'Nagaraju Yadav',      mob:'9555667788',type:'Residential',area:'250 sq.m',ulb:'Nizamabad MC',  date:'09 Mar 2026',status:'Under Scrutiny',reason:''},
+  {ref:'TGB-2026-10430',name:'Sita Ram Gupta',      mob:'9666778899',type:'Commercial', area:'550 sq.m',ulb:'GHMC',          date:'10 Mar 2026',status:'Pending',    reason:''},
+  {ref:'TGB-2026-10431',name:'Bhavani Devi',        mob:'9777889900',type:'Residential',area:'190 sq.m',ulb:'Karimnagar MC', date:'11 Mar 2026',status:'Approved',   reason:''},
+  {ref:'TGB-2026-10432',name:'Ramesh Chandra',      mob:'9888990011',type:'Residential',area:'330 sq.m',ulb:'GHMC',          date:'12 Mar 2026',status:'Rejected',   reason:'Title deed discrepancy found'},
+];
+
+const ACTS=[
+  {c:'g',txt:'Approved application <strong>TGB-2026-10428</strong> — Kavitha Reddy (Residential, 120 sq.m)',t:'Today, 10:24 AM'},
+  {c:'b',txt:'Started scrutiny for <strong>TGB-2026-10429</strong> — Nagaraju Yadav',t:'Today, 09:48 AM'},
+  {c:'r',txt:'Rejected application <strong>TGB-2026-10432</strong> — Title deed discrepancy found',t:'Yesterday, 4:15 PM'},
+  {c:'a',txt:'Sent query to applicant <strong>TGB-2026-10427</strong> — requested industrial clearance docs',t:'Yesterday, 2:30 PM'},
+  {c:'g',txt:'Approved application <strong>TGB-2026-10431</strong> — Bhavani Devi (Residential, 190 sq.m)',t:'Yesterday, 11:00 AM'},
+];
+
+/* ── PDF DOCUMENT DATA (from uploaded permit PDF) ── */
+const PDF_DOCS=[{
+  id:'PDF-KAPRA-0994-2025',
+  letterNo:'53764/KAPRA/0994/2025',
+  letterDate:'14-03-2026',
+  type:'Letter of Approval for Commencement of Work',
+  issuer:'Office of Kapra Municipality, Medchal-Malkajgiri District',
+  authority:'TS-bPASS Instant Approval',
+  appNo:'53764/KAPRA/0994/2025',
+  appDate:'03-07-2025',
+  permitNo:'53764/KAPRA/0994/2025',
+  permitDate:'14-07-2025',
+  postVerifDate:'12-07-2025',
+  // Applicant
+  ownerName:'KATURI VENKATESWARLU',
+  fatherName:'KATURI TIRUPATHI VENKANNA',
+  address:'H.No.1-1-29/4/2, Virat Nagar Colony, Jammigadda, Kapra Mandal, Medchal-Malkajgiri',
+  // Plot
+  plotExtent:'153.84 Sq.Mtrs (184.00 Sq.Yds)',
+  roadAffected:'10.79 Sq. Meters',
+  netPlotArea:'143.05 Sq. Meters',
+  plotNo:'1-1-29/4/2',
+  surveyNos:'199/8, 199/9, 199/10',
+  road:'20 Ft Road (South Side) & Road on West Side — Corner Plot',
+  locality:'Sri Virat Nagar Colony',
+  village:'Kapra',
+  mandal:'Kapra',
+  district:'Medchal-Malkajgiri',
+  // Approval
+  floors:'Stilt for Parking + 2 Upper Floors',
+  builtUpArea:'195.1 Sq. Meters',
+  parkingArea:'95.08 Sq. Meters',
+  // Setbacks
+  frontSetback:'3.0 Mts',
+  rearSetback:'2.0 Mts',
+  side1Setback:'1.5 Mts',
+  side2Setback:'1.5 Mts',
+  // Payment
+  payments:[
+    {desc:'Site Approval Charges',amt:'₹ 1,538.40'},
+    {desc:'Betterment Charges',amt:'₹ 30,768.00'},
+    {desc:'Development Charges on Built-up Area (G.O.Ms.No.225/226/223, dt:30.08.2016)',amt:'₹ 21,000.00'},
+    {desc:'Rain Water Harvesting Charges',amt:'₹ 5,000.00'},
+    {desc:'Debris Charges',amt:'₹ 3,000.00'},
+    {desc:'Compound Wall Fee',amt:'₹ 1,000.00'},
+    {desc:'Vacant Land Tax',amt:'₹ 1,597.90'},
+    {desc:'Postage / Advertisement Charges',amt:'₹ 200.00'},
+    {desc:'Sub Division of Plot / Amalgamation of Plot',amt:'₹ 1,137.50'},
+    {desc:'Conversion Charges',amt:'₹ 568.75'},
+    {desc:'Development Charges on Site Area (G.O.Ms.No.223, dt:30.08.2016)',amt:'₹ 30,768.00'},
+    {desc:'14% Open Space Contribution Charges on Prevailing Market Value',amt:'₹ 62,852.79'},
+    {desc:'Building Permit Fee',amt:'₹ 9,750.00'},
+    {desc:'TS-bPASS User Charges',amt:'₹ 1,000.00'},
+    {desc:'Regularization Charges with ref to Land Value',amt:'₹ 9,55,900.00'},
+    {desc:'Labour Cess',amt:'₹ 23,400.00'},
+  ],
+  totalPayment:'₹ 11,47,480.00',
+  conditions:[
+    'The approval issued does not confer upon any ownership rights over the property. The applicant is solely responsible for legal litigations or disputes if any.',
+    'The extent of the plot should not be a part of bigger plot split for this purpose as per the declaration.',
+    'Applicant should not construct more than Stilt for Parking + 2 Upper Floors. Any further construction beyond will be liable for penalty / demolition without notice.',
+    'If the abutting road width is less than 30 feet (9.00 Mts.), 15 feet (4.5 Mts.) from the center of the existing road has to be left for road widening in addition to front setback as per rule 4(a) of G.O. Ms. No. 168 MA dt:07-04-2012.',
+    'The proposed construction should be in conformity with the master plan land use and zoning regulations.',
+    'No building activity shall be carried out in certain area as per rule 3 of G.O. Ms. No. 168 MA dt:07-04-2012 and its amendments.',
+    'Applicant shall construct 1 rain water harvesting pit and plant 5 Trees within the plot at appropriate location as per G.O.Ms.No.350 MA dt:09-06-2000.',
+    'The applicant shall commence the construction within 6 months and should complete within a period of 3 years from date of approval. Applicant shall upload photographs of commencement within 6 months as per Sec.174(13) of Telangana Municipalities Act 2019.',
+    'Applicant is liable for penal action as per Telangana Municipalities Act, 2019 in case of misrepresentation or false declaration. Certificate of Registration will be revoked and construction will be demolished without notice under section 174(4).',
+    'The area mortgaged will be released on submission of building completion certificate and occupancy certificate.',
+    'If there are any Court cases pending, the proposal is subject to outcome of Court Orders.',
+  ],
+  signatoryName:'Sri. Katuri Venkateswarlu',
+  signatoryAddr:'S/o Katuri Tirupathi Venkanna, H.No.1-1-29/4/2, Sri Virat Nagar Colony, Jammiguda, Kapra Village and Mandal, Medchal-Malkajgiri',
+  signedBy:'Deputy Commissioner, KAPRA Municipality',
+  signDate:'12-07-2025',
+  signTime:'11:55 AM',
+  status:'APPROVED',
+  searchTags:['katuri','venkateswarlu','53764','kapra','0994','2025','199/8','199/9','199/10','virat nagar','medchal','malkajgiri','jammigadda','residential','stilt','building','permission','letter','approval'],
+}];
+
+/* ── CLOCK ── */
+function tick(){
+  const s=new Date().toLocaleString('en-IN',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+  const a=document.getElementById('pub-clock'),b=document.getElementById('dash-clock');
+  if(a)a.textContent=s;if(b)b.textContent=s;
+}
+setInterval(tick,1000);tick();
+const tlbl=document.getElementById('today-lbl');
+if(tlbl)tlbl.textContent=new Date().toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+
+/* ── FONT SIZE ── */
+let fz=14;
+window.chFz=function(d){fz=d===0?14:Math.min(20,Math.max(11,fz+d));document.body.style.fontSize=fz+'px';}
+
+/* ── HERO SLIDER ── */
+let slideIdx=0,slideTimer;
+const slides=document.querySelectorAll('.slide');
+const sdots=document.querySelectorAll('.sdot');
+function goSlide(n){slides[slideIdx].classList.remove('active');sdots[slideIdx].classList.remove('on');slideIdx=(n+slides.length)%slides.length;slides[slideIdx].classList.add('active');sdots[slideIdx].classList.add('on');}
+window.goSlide=goSlide;
+window.moveSlide=function(d){clearInterval(slideTimer);goSlide(slideIdx+d);startAuto();}
+function startAuto(){slideTimer=setInterval(()=>goSlide(slideIdx+1),5000);}
+startAuto();
+sdots.forEach((d,i)=>d.addEventListener('click',()=>{clearInterval(slideTimer);goSlide(i);startAuto();}));
+
+window.scrollId=function(id){
+  const el=document.getElementById(id);
+  if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+/* ── LOGIN ── */
+window.openLogin=function(){document.getElementById('login-modal').classList.add('open');}
+window.closeLogin=function(){document.getElementById('login-modal').classList.remove('open');}
+window.switchTab=function(t){['o','c','a'].forEach(k=>{const b=document.getElementById('tb-'+k);if(b)b.classList.toggle('on',k===t);});}
+window.doLogin=function(){
+  const u=document.getElementById('l-user').value.trim();
+  const p=document.getElementById('l-pass').value.trim();
+  const err=document.getElementById('login-err');
+  err.classList.remove('show');
+  if(!u||!p){err.textContent='Please enter email and password.';err.classList.add('show');return;}
+  if(u==='charanacharya08@tgbpass.com'&&p==='Charan123'){
+    window.closeLogin();
+    document.getElementById('site-wrap').style.display='none';
+    document.getElementById('dash-wrap').style.display='flex';
+    document.getElementById('dash-wrap').style.flexDirection='column';
+    buildAllTables();
+    window.showToast('Welcome back, Charan Acharya. Logged in as Officer.');
+  } else {
+    err.textContent='Invalid credentials. Please check your email and password.';
+    err.classList.add('show');
+  }
+}
+window.doLogout=function(){
+  if(!confirm('Are you sure you want to logout?'))return;
+  document.getElementById('dash-wrap').style.display='none';
+  document.getElementById('site-wrap').style.display='block';
+  window.showToast('Logged out successfully.');
+}
+document.getElementById('login-modal').addEventListener('click',function(e){if(e.target===this)closeLogin();});
+document.getElementById('act-modal').addEventListener('click',function(e){if(e.target===this)closeActModal();});
+
+/* ── SIDEBAR NAV ── */
+document.querySelectorAll('.sb-item').forEach(item=>{
+  item.addEventListener('click',function(){
+    const vid=this.dataset.view;if(!vid)return;
+    activateView(vid);
+    document.querySelectorAll('.sb-item').forEach(s=>s.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+function activateView(vid){
+  document.querySelectorAll('.dview').forEach(v=>v.classList.remove('active'));
+  const el=document.getElementById(vid);if(el)el.classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(s=>{s.classList.toggle('active',s.dataset.view===vid);});
+}
+window.activateView=activateView;
+
+/* ── BADGE ── */
+function badge(s){
+  const m={
+    'Approved':'<span class="badge appr">Approved</span>',
+    'Pending':'<span class="badge pend">Pending</span>',
+    'Rejected':'<span class="badge rejt">Rejected</span>',
+    'Under Scrutiny':'<span class="badge scru">Under Scrutiny</span>',
+  };
+  return m[s]||`<span class="badge">${s}</span>`;
+}
+
+/* ── TABLE BUILDERS ── */
+function buildAllTables(){buildRecent();buildAll(APPS);buildPending();buildScrutiny();buildApproved();buildRejected();buildActivity();}
+function buildRecent(){
+  document.getElementById('recent-tb').innerHTML=APPS.slice(0,6).map(a=>`
+    <tr><td><strong style="color:var(--green);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+    <td>${a.name}</td><td><span class="badge info">${a.type}</span></td>
+    <td>${a.ulb}</td><td>${a.date}</td><td>${badge(a.status)}</td>
+    <td><div class="acts"><button class="ab view" onclick="viewDetail('${a.ref}')">View</button>
+    ${canAct(a)?`<button class="ab appr" onclick="openAct('approve','${a.ref}')">Approve</button>
+    <button class="ab rejt" onclick="openAct('reject','${a.ref}')">Reject</button>`:''}
+    </div></td></tr>`).join('');
+}
+function buildAll(data){
+  document.getElementById('all-tb').innerHTML=data.map(a=>`
+    <tr><td><strong style="color:var(--green);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+    <td>${a.name}</td><td>${a.mob}</td><td><span class="badge info">${a.type}</span></td>
+    <td>${a.area}</td><td>${a.ulb}</td><td>${a.date}</td><td>${badge(a.status)}</td>
+    <td><div class="acts"><button class="ab view" onclick="viewDetail('${a.ref}')">View</button>
+    ${canAct(a)?`<button class="ab appr" onclick="openAct('approve','${a.ref}')">Approve</button>
+    <button class="ab rejt" onclick="openAct('reject','${a.ref}')">Reject</button>
+    <button class="ab qry" onclick="openAct('query','${a.ref}')">Query</button>`:''}
+    ${a.status==='Approved'?`<button class="ab dl" onclick="showToast('Downloading letter...')">Download</button>`:''}
+    </div></td></tr>`).join('');
+}
+function buildPending(){
+  document.getElementById('pend-tb').innerHTML=APPS.filter(a=>a.status==='Pending').map((a,i)=>`
+    <tr><td><strong style="color:var(--green);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+    <td>${a.name}</td><td><span class="badge info">${a.type}</span></td><td>${a.area}</td><td>${a.date}</td>
+    <td><span style="color:${i<2?'var(--red)':'var(--accent)'};font-weight:600;">${i<2?'2 days left':(9+i)+' days left'}</span></td>
+    <td><div class="acts"><button class="ab view" onclick="viewDetail('${a.ref}')">View</button>
+    <button class="ab appr" onclick="openAct('approve','${a.ref}')">Approve</button>
+    <button class="ab rejt" onclick="openAct('reject','${a.ref}')">Reject</button>
+    <button class="ab qry" onclick="openAct('query','${a.ref}')">Query</button></div></td></tr>`).join('');
+}
+function buildScrutiny(){
+  document.getElementById('scru-tb').innerHTML=APPS.filter(a=>a.status==='Under Scrutiny').map(a=>`
+    <tr><td><strong style="color:var(--green);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+    <td>${a.name}</td><td><span class="badge info">${a.type}</span></td><td>${a.area}</td><td>${a.date}</td>
+    <td>Charan Acharya</td>
+    <td><div class="acts"><button class="ab view" onclick="viewDetail('${a.ref}')">View</button>
+    <button class="ab appr" onclick="openAct('approve','${a.ref}')">Approve</button>
+    <button class="ab rejt" onclick="openAct('reject','${a.ref}')">Reject</button></div></td></tr>`).join('');
+}
+function buildApproved(){
+  document.getElementById('appr-tb').innerHTML=APPS.filter(a=>a.status==='Approved').map(a=>`
+    <tr><td><strong style="color:var(--green);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+    <td>${a.name}</td><td><span class="badge info">${a.type}</span></td><td>${a.area}</td><td>${a.date}</td>
+    <td><span style="color:var(--green);font-weight:600;">Valid 3 years</span></td>
+    <td><div class="acts"><button class="ab view" onclick="viewDetail('${a.ref}')">View</button>
+    <button class="ab dl" onclick="showToast('Downloading permission letter...')">Download</button></div></td></tr>`).join('');
+}
+function buildRejected(){
+  document.getElementById('rejt-tb').innerHTML=APPS.filter(a=>a.status==='Rejected').map(a=>`
+    <tr><td><strong style="color:var(--red);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+    <td>${a.name}</td><td><span class="badge info">${a.type}</span></td><td>${a.date}</td>
+    <td style="color:var(--red);font-size:12.5px;">${a.reason||'Document deficiency'}</td>
+    <td><div class="acts"><button class="ab view" onclick="viewDetail('${a.ref}')">View</button>
+    <button class="ab qry" onclick="showToast('Rejection notice resent to applicant.')">Resend</button></div></td></tr>`).join('');
+}
+function buildActivity(){
+  document.getElementById('activity-list').innerHTML=ACTS.map(a=>`
+    <div class="act-item"><div class="adot ${a.c}" style="margin-top:5px;"></div>
+    <div><div class="atext">${a.txt}</div><div class="atime">${a.t}</div></div></div>`).join('');
+}
+function canAct(a){return a.status==='Pending'||a.status==='Under Scrutiny';}
+
+/* ── FILTER ── */
+window.filterApps=function(){
+  const q=document.getElementById('app-q').value.toLowerCase();
+  const sf=document.getElementById('app-sf').value;
+  const tf=document.getElementById('app-tf').value;
+  buildAll(APPS.filter(a=>(!q||(a.ref+a.name+a.mob).toLowerCase().includes(q))&&(!sf||a.status===sf)&&(!tf||a.type===tf)));
+}
+
+/* ── DETAIL VIEW ── */
+window.viewDetail=function(ref){
+  const a=APPS.find(x=>x.ref===ref);if(!a)return;
+  const v=document.getElementById('v-detail');
+  v.innerHTML=`<div class="phdr">
+    <div><h2>Application Detail</h2><div class="bc">Home / Applications / ${ref}</div></div>
+    <div class="phdr-actions">
+      <button class="btn out" onclick="activateView('v-all')">Back</button>
+      ${canAct(a)?`<button class="btn green" onclick="openAct('approve','${a.ref}')">Approve</button>
+      <button class="btn red" onclick="openAct('reject','${a.ref}')">Reject</button>
+      <button class="btn amber" onclick="openAct('query','${a.ref}')">Query</button>`:''}
+      ${a.status==='Approved'?`<button class="btn blue" onclick="showToast('Downloading permission letter...')">Download Letter</button>`:''}
+    </div></div>
+    <div class="dp"><h3>Application Information &nbsp; ${badge(a.status)}</h3>
+    <div class="dg">
+      <div><div class="di-lbl">Reference No.</div><div class="di-val" style="color:var(--green);font-weight:700;font-family:'IBM Plex Mono',monospace;">${a.ref}</div></div>
+      <div><div class="di-lbl">Applicant Name</div><div class="di-val">${a.name}</div></div>
+      <div><div class="di-lbl">Mobile</div><div class="di-val">${a.mob}</div></div>
+      <div><div class="di-lbl">Building Type</div><div class="di-val">${a.type}</div></div>
+      <div><div class="di-lbl">Plot Area</div><div class="di-val">${a.area}</div></div>
+      <div><div class="di-lbl">ULB</div><div class="di-val">${a.ulb}</div></div>
+      <div><div class="di-lbl">Submitted</div><div class="di-val">${a.date}</div></div>
+      <div><div class="di-lbl">Current Status</div><div class="di-val">${a.status}</div></div>
+      ${a.reason?`<div><div class="di-lbl">Rejection Reason</div><div class="di-val" style="color:var(--red);">${a.reason}</div></div>`:''}
+    </div></div>
+    <div class="dp"><h3>Uploaded Documents</h3>
+    <table><thead><tr><th>Document</th><th>Uploaded</th><th>Status</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td>Title Deed / Sale Deed</td><td>${a.date}</td><td><span class="badge appr">Verified</span></td><td><button class="ab view" onclick="showToast('Opening document...')">View</button></td></tr>
+      <tr><td>Pattadar Passbook / ROR</td><td>${a.date}</td><td><span class="badge ${a.status==='Rejected'?'rejt':'appr'}">${a.status==='Rejected'?'Rejected':'Verified'}</span></td><td><button class="ab view" onclick="showToast('Opening document...')">View</button></td></tr>
+      <tr><td>Approved Layout Plan</td><td>${a.date}</td><td><span class="badge appr">Verified</span></td><td><button class="ab view" onclick="showToast('Opening document...')">View</button></td></tr>
+      <tr><td>Architect Drawing</td><td>${a.date}</td><td><span class="badge scru">Under Review</span></td><td><button class="ab view" onclick="showToast('Opening document...')">View</button></td></tr>
+    </tbody></table></div>`;
+  activateView('v-detail');
+}
+
+/* ── SEARCH DOCUMENTS (with PDF data) ── */
+window.searchDocs=function(){
+  const q=document.getElementById('doc-q').value.trim().toLowerCase();
+  const out=document.getElementById('search-out');
+  if(!q){showToast('Enter a search term','err');return;}
+
+  // Match against PDF documents
+  const pdfMatches=PDF_DOCS.filter(d=>{
+    const searchStr=(d.letterNo+d.ownerName+d.fatherName+d.address+d.surveyNos+
+      d.locality+d.village+d.mandal+d.district+d.plotNo+d.appNo+
+      d.type+d.issuer+d.searchTags.join(' ')).toLowerCase();
+    return searchStr.includes(q);
+  });
+
+  // Match against app docs
+  const appMatches=APPS.filter(a=>(a.ref+a.name+a.mob).toLowerCase().includes(q));
+
+  if(pdfMatches.length===0&&appMatches.length===0){
+    out.innerHTML=`<div class="search-hint-empty">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div>No results found for "<strong>${q}</strong>"</div>
+      <div style="font-size:12px;color:#bbb;margin-top:6px;">Try: KATURI, 53764, Survey No. 199/8, Kapra, Venkateswarlu</div>
+    </div>`;
+    return;
+  }
+
+  let html='';
+
+  // Render PDF permit documents
+  pdfMatches.forEach(d=>{
+    html+=`<div class="pdf-result" style="margin-bottom:20px;">
+      <div class="pdf-header">
+        <div class="pdf-header-left">
+          <div class="pdf-icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="pdf-title">${d.type}</div>
+            <div class="pdf-subtitle">${d.issuer}</div>
+          </div>
+        </div>
+        <div class="pdf-badge">${d.status}</div>
+      </div>
+
+      <div class="pdf-body">
+        <!-- Header Info -->
+        <div class="pdf-section">
+          <div class="pdf-sec-header"><div class="pdf-sec-title">Document Reference</div></div>
+          <div class="pdf-sec-body">
+            <div class="info-grid">
+              <div class="info-item"><div class="lbl">Letter Number</div><div class="val mono">${d.letterNo}</div></div>
+              <div class="info-item"><div class="lbl">Letter Date</div><div class="val">${d.letterDate}</div></div>
+              <div class="info-item"><div class="lbl">Application No.</div><div class="val mono">${d.appNo}</div></div>
+              <div class="info-item"><div class="lbl">Application Date</div><div class="val">${d.appDate}</div></div>
+              <div class="info-item"><div class="lbl">Permit Order No.</div><div class="val mono">${d.permitNo}</div></div>
+              <div class="info-item"><div class="lbl">Post Verification</div><div class="val">${d.postVerifDate}</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Applicant Details -->
+        <div class="pdf-section">
+          <div class="pdf-sec-header"><div class="pdf-sec-title">Applicant Details</div></div>
+          <div class="pdf-sec-body">
+            <div class="info-grid">
+              <div class="info-item"><div class="lbl">Owner Name</div><div class="val" style="font-weight:600;">${d.ownerName}</div></div>
+              <div class="info-item"><div class="lbl">Father's Name</div><div class="val">${d.fatherName}</div></div>
+              <div class="info-item" style="grid-column:span 1;"><div class="lbl">Address</div><div class="val">${d.address}</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Plot Details -->
+        <div class="pdf-section">
+          <div class="pdf-sec-header"><div class="pdf-sec-title">Plot Details</div></div>
+          <div class="pdf-sec-body">
+            <div class="info-grid">
+              <div class="info-item"><div class="lbl">Plot Extent</div><div class="val">${d.plotExtent}</div></div>
+              <div class="info-item"><div class="lbl">Net Plot Area</div><div class="val">${d.netPlotArea}</div></div>
+              <div class="info-item"><div class="lbl">Road Affected Area</div><div class="val highlight">${d.roadAffected}</div></div>
+              <div class="info-item"><div class="lbl">Plot No.</div><div class="val mono">${d.plotNo}</div></div>
+              <div class="info-item"><div class="lbl">Survey Nos.</div><div class="val mono">${d.surveyNos}</div></div>
+              <div class="info-item"><div class="lbl">Road / Street</div><div class="val">${d.road}</div></div>
+              <div class="info-item"><div class="lbl">Locality</div><div class="val">${d.locality}</div></div>
+              <div class="info-item"><div class="lbl">Village / Mandal</div><div class="val">${d.village}, ${d.mandal}</div></div>
+              <div class="info-item"><div class="lbl">District</div><div class="val">${d.district}</div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Approval Details -->
+        <div class="pdf-section">
+          <div class="pdf-sec-header"><div class="pdf-sec-title">Approval Details</div></div>
+          <div class="pdf-sec-body">
+            <div class="info-grid">
+              <div class="info-item"><div class="lbl">No. of Floors</div><div class="val" style="font-weight:600;color:var(--g2);">${d.floors}</div></div>
+              <div class="info-item"><div class="lbl">Total Built-up Area</div><div class="val">${d.builtUpArea}</div></div>
+              <div class="info-item"><div class="lbl">Parking Area</div><div class="val">${d.parkingArea}</div></div>
+            </div>
+            <div style="margin-top:14px;padding-top:14px;border-top:1px solid #f0f0f0;">
+              <div style="font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;">Setbacks</div>
+              <div class="info-grid">
+                <div class="info-item"><div class="lbl">Front Setback</div><div class="val">${d.frontSetback}</div></div>
+                <div class="info-item"><div class="lbl">Rear Setback</div><div class="val">${d.rearSetback}</div></div>
+                <div class="info-item"><div class="lbl">Side 1 Setback</div><div class="val">${d.side1Setback}</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Payment Details -->
+        <div class="pdf-section">
+          <div class="pdf-sec-header"><div class="pdf-sec-title">Payment Details</div><div class="pdf-sec-count">16 items</div></div>
+          <div class="pdf-sec-body" style="padding:0;">
+            <table class="payment-table">
+              <thead><tr><th>#</th><th>Charge Description</th><th style="text-align:right;">Amount</th></tr></thead>
+              <tbody>
+                ${d.payments.map((p,i)=>`<tr><td style="color:#bbb;font-size:12px;">${String(i+1).padStart(2,'0')}</td><td class="charge-name">${p.desc}</td><td class="charge-amt">${p.amt}</td></tr>`).join('')}
+                <tr class="payment-total"><td colspan="2" style="padding:12px;font-size:14px;color:var(--g2);">TOTAL (INR)</td><td class="charge-amt" style="padding:12px;">${d.totalPayment}</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Conditions -->
+        <div class="pdf-section">
+          <div class="pdf-sec-header"><div class="pdf-sec-title">Conditions of Approval</div><div class="pdf-sec-count">${d.conditions.length} conditions</div></div>
+          <div class="pdf-sec-body">
+            <div class="conditions-list">
+              ${d.conditions.map((c,i)=>`<div class="cond-item"><div class="cond-letter">${String.fromCharCode(97+i)}.</div><div>${c}</div></div>`).join('')}
+            </div>
+          </div>
+        </div>
+
+        <!-- Signatory -->
+        <div class="pdf-section" style="background:#f8fbf8;">
+          <div class="pdf-sec-body">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;">
+              <div>
+                <div style="font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Applicant</div>
+                <div style="font-size:13px;font-weight:600;">${d.signatoryName}</div>
+                <div style="font-size:12px;color:#666;margin-top:3px;max-width:300px;line-height:1.5;">${d.signatoryAddr}</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:11px;font-weight:700;color:#999;text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;">Signed By</div>
+                <div style="font-size:13px;font-weight:700;color:var(--g2);">${d.signedBy}</div>
+                <div style="font-size:12px;color:#666;margin-top:2px;">Date: ${d.signDate} &nbsp;|&nbsp; Time: ${d.signTime}</div>
+                <div style="font-size:11px;color:#aaa;margin-top:4px;font-style:italic;">Computer generated — no manual signature required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  });
+
+  // Render regular app doc matches
+  if(appMatches.length>0){
+    const sm={Approved:'appr',Pending:'pend',Rejected:'rejt','Under Scrutiny':'scru'};
+    html+=`<div class="tc" style="margin-top:${pdfMatches.length?'20px':'0'};">
+      <div class="tc-head"><div class="tc-title">Application Documents — ${appMatches.length} match${appMatches.length>1?'es':''}</div></div>
+      <table><thead><tr><th>Ref No.</th><th>Applicant</th><th>Type</th><th>Date</th><th>Status</th><th>Action</th></tr></thead>
+      <tbody>${appMatches.map(a=>`<tr>
+        <td><strong style="color:var(--green);font-family:'IBM Plex Mono',monospace;">${a.ref}</strong></td>
+        <td>${a.name}</td><td>${a.type}</td><td>${a.date}</td>
+        <td><span class="badge ${sm[a.status]||''}">${a.status}</span></td>
+        <td><button class="ab view" onclick="viewDetail('${a.ref}')">View</button></td></tr>`).join('')}
+      </tbody></table></div>`;
+  }
+
+  out.innerHTML=html;
+}
+
+/* ── ACTION MODAL ── */
+let curAct={type:'',ref:''};
+window.openAct=function(type,ref){
+  curAct={type,ref};
+  const titles={approve:'Approve Application',reject:'Reject Application',query:'Send Query'};
+  const descs={
+    approve:'You are about to <strong>approve</strong> this application. A digitally signed permission letter will be issued to the applicant.',
+    reject:'You are about to <strong>reject</strong> this application. Please provide a clear reason for rejection.',
+    query:'Send a query / clarification request to the applicant regarding missing or incorrect information.',
+  };
+  document.getElementById('am-title').textContent=titles[type];
+  document.getElementById('am-desc').innerHTML=descs[type];
+  document.getElementById('am-ref').textContent=ref;
+  document.getElementById('am-remarks').placeholder=type==='reject'?'Enter rejection reason (required)...':'Add remarks (optional)...';
+  document.getElementById('am-remarks').value='';
+  const ok=document.getElementById('am-ok');
+  ok.textContent={approve:'Confirm Approval',reject:'Confirm Rejection',query:'Send Query'}[type];
+  ok.className='btn '+(type==='reject'?'red':type==='query'?'amber':'green');
+  document.getElementById('act-modal').classList.add('open');
+}
+window.closeActModal=function(){document.getElementById('act-modal').classList.remove('open');}
+window.confirmAction=function(){
+  const {type,ref}=curAct;
+  const remarks=document.getElementById('am-remarks').value.trim();
+  if(type==='reject'&&!remarks){window.showToast('Please provide a rejection reason','err');return;}
+  const app=APPS.find(a=>a.ref===ref);
+  if(app){if(type==='approve')app.status='Approved';else if(type==='reject'){app.status='Rejected';app.reason=remarks;}}
+  window.closeActModal();
+  window.showToast({approve:`Application ${ref} approved. Permission letter will be sent.`,reject:`Application ${ref} rejected. Applicant has been notified.`,query:`Query sent to applicant for ${ref}. Awaiting response.`}[type]);
+  ACTS.unshift({c:{approve:'g',reject:'r',query:'a'}[type],txt:{approve:`Approved application <strong>${ref}</strong>`,reject:`Rejected application <strong>${ref}</strong> — ${remarks}`,query:`Sent query for <strong>${ref}</strong>`}[type],t:'Just now'});
+  buildAllTables();
+}
+
+/* ── CONTACT FORM ── */
+function submitContact(){
+  const f=document.getElementById('cf1').value.trim();
+  const e=document.getElementById('cf3').value.trim();
+  const m=document.getElementById('cf5').value.trim();
+  if(!f||!e||!m){showToast('Please fill all required fields','err');return;}
+  if(!document.getElementById('robot').checked){showToast('Please confirm you are not a robot','err');return;}
+  showToast("Message sent. We'll reply within 24 hours.");
+  ['cf1','cf2','cf3','cf4','cf5'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('robot').checked=false;
+}
+window.submitContact=submitContact;
+
+/* ── TOAST ── */
+let toastTimer;
+window.showToast=function showToast(msg,type=''){
+  const el=document.getElementById('toast');
+  el.textContent=msg;el.className='show'+(type?' '+type:'');
+  clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.className='',3500);
+}
+</script>
+</body>
+</html>
