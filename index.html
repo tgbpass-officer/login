@@ -132,8 +132,8 @@ button{cursor:pointer;font-family:'IBM Plex Sans',sans-serif;}
 .foot-bottom{border-top:1px solid #2a2a2a;padding-top:14px;text-align:center;font-size:11.5px;color:#555;max-width:1100px;margin:0 auto;}
 
 /* LOGIN MODAL */
-#login-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:5000;display:none;align-items:center;justify-content:center;}
-#login-modal.open{display:flex;}
+#login-modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:5000;display:none;align-items:center;justify-content:center;pointer-events:none;}
+#login-modal.open{display:flex;pointer-events:all;}
 .modal-box{background:#fff;border-radius:10px;padding:38px;width:430px;max-width:94vw;position:relative;box-shadow:0 20px 60px rgba(0,0,0,.25);animation:popIn .28s ease;}
 @keyframes popIn{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
 .modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;color:#aaa;line-height:1;transition:color .18s;}
@@ -270,8 +270,8 @@ tr:last-child td{border-bottom:none;}
 .adot.g{background:var(--green);}.adot.b{background:var(--blue);}.adot.r{background:var(--red);}.adot.a{background:var(--accent);}
 .atext{font-size:13px;color:#444;line-height:1.5;}
 .atime{font-size:11.5px;color:#bbb;margin-top:2px;}
-#act-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:7000;display:none;align-items:center;justify-content:center;}
-#act-modal.open{display:flex;}
+#act-modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:7000;display:none;align-items:center;justify-content:center;pointer-events:none;}
+#act-modal.open{display:flex;pointer-events:all;}
 .am-box{background:#fff;border-radius:8px;padding:30px;width:480px;max-width:94vw;animation:popIn .25s ease;box-shadow:0 16px 50px rgba(0,0,0,.2);}
 .am-box h3{font-size:18px;font-weight:700;margin-bottom:10px;}
 .am-box p{font-size:13.5px;color:#666;margin-bottom:16px;line-height:1.65;}
@@ -425,8 +425,8 @@ tr:last-child td{border-bottom:none;}
         <a href="javascript:void(0)">Track Complaint Status</a>
       </div>
     </div>
-    <button class="nav-login" onclick="openLogin()">LOGIN ▾</button>
-    <button class="nav-apply" onclick="openLogin()">APPLY NOW</button>
+    <button class="nav-login" id="nav-btn-login" onclick="openLogin()">LOGIN ▾</button>
+    <button class="nav-apply" id="nav-btn-apply" onclick="openLogin()">APPLY NOW</button>
   </div>
 </nav>
 
@@ -625,11 +625,6 @@ tr:last-child td{border-bottom:none;}
     <div class="modal-logo">TG-bPASS</div>
     <h2>Sign In</h2>
     <p class="modal-sub">Access your TG-bPASS account</p>
-    <div style="background:#f0f8f4;border:1px solid var(--border);border-radius:4px;padding:8px 14px;margin-bottom:16px;font-size:12px;color:#555;line-height:1.7;">
-      <strong style="color:var(--g2);display:block;margin-bottom:2px;">Login Credentials</strong>
-      Email: <span style="font-family:'IBM Plex Mono',monospace;color:var(--green);">charanacharya08@tgbpass.com</span><br>
-      Password: <span style="font-family:'IBM Plex Mono',monospace;color:var(--green);">Charan123</span>
-    </div>
     <div class="tab-row">
       <button class="tab-btn on" id="tb-o" onclick="switchTab('o')">Officer</button>
       <button class="tab-btn" id="tb-c" onclick="switchTab('c')">Citizen</button>
@@ -637,7 +632,7 @@ tr:last-child td{border-bottom:none;}
     </div>
     <div class="err-box" id="login-err">Invalid credentials. Please try again.</div>
     <div class="fld"><label>Email / Username</label><input id="l-user" placeholder="Enter your email"></div>
-    <div class="fld"><label>Password</label><input type="password" id="l-pass" placeholder="Enter password"></div>
+    <div class="fld"><label>Password</label><input type="password" id="l-pass" placeholder="Enter password" onkeydown="if(event.key==='Enter')doLogin()"></div>
     <div class="fld-forgot">Forgot Password?</div>
     <button class="login-btn" onclick="doLogin()">SIGN IN</button>
     <p style="text-align:center;margin-top:14px;font-size:12.5px;color:#999;">New applicant? <span style="color:var(--green);cursor:pointer;font-weight:600;">Register as Citizen</span></p>
@@ -864,7 +859,7 @@ tr:last-child td{border-bottom:none;}
           <h3>Search by Ref No. / Applicant Name / Survey No. / Document Type</h3>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:22px;">
             <div style="flex:1;min-width:240px;">
-              <input id="doc-q" placeholder="Try: KATURI, 53764, 199/8, Kapra, Venkateswarlu..."
+              <input id="doc-q" placeholder="Enter application number e.g. TGB-2026-10421"
                 style="width:100%;padding:10px 14px;border:1px solid #ccc;border-radius:4px;font-family:'IBM Plex Sans',sans-serif;font-size:13.5px;outline:none;transition:border-color .2s;"
                 onfocus="this.style.borderColor='var(--green)'" onblur="this.style.borderColor='#ccc'"
                 onkeydown="if(event.key==='Enter')searchDocs()">
@@ -883,7 +878,7 @@ tr:last-child td{border-bottom:none;}
             <div class="search-hint-empty">
               <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
               <div>Enter a keyword to search permit documents</div>
-              <div style="font-size:12px;color:#bbb;margin-top:6px;">Try searching: KATURI, 53764/KAPRA/0994/2025, Survey No. 199/8, or Kapra Municipality</div>
+              <div style="font-size:12px;color:#bbb;margin-top:6px;">Try: TGB-2026-10421, TGB-2026-10424, or search by ULB name</div>
             </div>
           </div>
         </div>
@@ -946,7 +941,7 @@ tr:last-child td{border-bottom:none;}
           </div>
           <div class="dg">
             <div><div class="di-lbl">Employee ID</div><div class="di-val">TGB-OFF-2024-0842</div></div>
-            <div><div class="di-lbl">Email</div><div class="di-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="23404b4251424d42404b42515a42131b63574441534250500d404c4e">[email&#160;protected]</a></div></div>
+            <div><div class="di-lbl">Email</div><div class="di-val">charanacharya08@tgbpass.com</div></div>
             <div><div class="di-lbl">Mobile</div><div class="di-val">+91 98765 43210</div></div>
             <div><div class="di-lbl">Designation</div><div class="di-val">Building Permission Officer</div></div>
             <div><div class="di-lbl">Jurisdiction</div><div class="di-val">GHMC — Zone 4 (Secunderabad)</div></div>
@@ -1116,8 +1111,8 @@ window.chFz=function(d){fz=d===0?14:Math.min(20,Math.max(11,fz+d));document.body
 
 /* ── HERO SLIDER ── */
 let slideIdx=0,slideTimer;
-const slides=document.querySelectorAll('.slide');
-const sdots=document.querySelectorAll('.sdot');
+const slides=document.querySelectorAll('#hero .slide');
+const sdots=document.querySelectorAll('#slide-dots .sdot');
 function goSlide(n){slides[slideIdx].classList.remove('active');sdots[slideIdx].classList.remove('on');slideIdx=(n+slides.length)%slides.length;slides[slideIdx].classList.add('active');sdots[slideIdx].classList.add('on');}
 window.goSlide=goSlide;
 window.moveSlide=function(d){clearInterval(slideTimer);goSlide(slideIdx+d);startAuto();}
@@ -1131,7 +1126,12 @@ window.scrollId=function(id){
 }
 
 /* ── LOGIN ── */
-window.openLogin=function(){document.getElementById('login-modal').classList.add('open');}
+window.openLogin=function(){
+  document.getElementById('login-modal').classList.add('open');
+  document.getElementById('login-err').classList.remove('show');
+  document.getElementById('l-user').value='';
+  document.getElementById('l-pass').value='';
+}
 window.closeLogin=function(){document.getElementById('login-modal').classList.remove('open');}
 window.switchTab=function(t){['o','c','a'].forEach(k=>{const b=document.getElementById('tb-'+k);if(b)b.classList.toggle('on',k===t);});}
 window.doLogin=function(){
@@ -1143,6 +1143,8 @@ window.doLogin=function(){
   if(u==='charanacharya08@tgbpass.com'&&p==='Charan123'){
     window.closeLogin();
     document.getElementById('site-wrap').style.display='none';
+    document.getElementById('nav-btn-login').style.display='none';
+    document.getElementById('nav-btn-apply').style.display='none';
     document.getElementById('dash-wrap').style.display='flex';
     document.getElementById('dash-wrap').style.flexDirection='column';
     buildAllTables();
@@ -1156,6 +1158,8 @@ window.doLogout=function(){
   if(!confirm('Are you sure you want to logout?'))return;
   document.getElementById('dash-wrap').style.display='none';
   document.getElementById('site-wrap').style.display='block';
+  document.getElementById('nav-btn-login').style.display='';
+  document.getElementById('nav-btn-apply').style.display='';
   window.showToast('Logged out successfully.');
 }
 document.getElementById('login-modal').addEventListener('click',function(e){if(e.target===this)closeLogin();});
@@ -1319,7 +1323,7 @@ window.searchDocs=function(){
     out.innerHTML=`<div class="search-hint-empty">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <div>No results found for "<strong>${q}</strong>"</div>
-      <div style="font-size:12px;color:#bbb;margin-top:6px;">Try: KATURI, 53764, Survey No. 199/8, Kapra, Venkateswarlu</div>
+      <div style="font-size:12px;color:#bbb;margin-top:6px;">Try: TGB-2026-10421, TGB-2026-10424, or search by ULB name</div>
     </div>`;
     return;
   }
@@ -1519,11 +1523,14 @@ window.submitContact=submitContact;
 
 /* ── TOAST ── */
 let toastTimer;
-window.showToast=function showToast(msg,type=''){
-  const el=document.getElementById('toast');
-  el.textContent=msg;el.className='show'+(type?' '+type:'');
-  clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.className='',3500);
-}
+window.showToast=function(msg,type){
+  const t=document.getElementById('toast');
+  clearTimeout(toastTimer);
+  t.textContent=msg;
+  t.className='show'+(type?' '+type:'');
+  toastTimer=setTimeout(()=>{t.className='';},3200);
+};
+
 </script>
 </body>
 </html>
